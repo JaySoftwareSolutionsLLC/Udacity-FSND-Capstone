@@ -12,9 +12,9 @@ def create_app(test_config=None):
 
     @app.route('/')
     def get_greeting():
-        # excited = os.environ['EXCITED']
+        excited = os.environ['EXCITED']
         greeting = "Hello" 
-        # if excited == 'true': greeting = greeting + "!!!!!"
+        if excited == 'true': greeting = greeting + "!!!!!"
         return greeting
 
     @app.route('/coolkids')
@@ -27,3 +27,5 @@ app = create_app()
 
 if __name__ == '__main__':
     app.run()
+
+# Need to run "export EXCITED=true" or "export EXCITED=false" before running app locally
