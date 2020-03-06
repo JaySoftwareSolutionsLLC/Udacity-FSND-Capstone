@@ -2,7 +2,10 @@ from sqlalchemy import Column, String, create_engine
 from flask_sqlalchemy import SQLAlchemy
 import json
 
-database_path = os.environ['DATABASE_URL']
+database_name = "Udacity-FSND-Capstone"
+database_path = "postgres://{}:{}@{}/{}".format(
+    'postgres', '$u944jAk161519', 'localhost:5432', database_name)
+# database_path = os.environ['DATABASE_URL']
 
 db = SQLAlchemy()
 
@@ -25,7 +28,7 @@ Have title and release year
 class Person(db.Model):  
   __tablename__ = 'People'
 
-  id = Column(Integer, primary_key=True)
+  id = Column(db.Integer, primary_key=True)
   name = Column(String)
   catchphrase = Column(String)
 
