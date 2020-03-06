@@ -6,3 +6,4 @@ SQLAlchemy
 Flask-Cors
 gunicorn
 xlrd
+psycopg2
