@@ -28,4 +28,4 @@ app = create_app()
 if __name__ == '__main__':
     app.run()
 
-# Need to run "export EXCITED=true" or "export EXCITED=false" before running app locally
+# Need to run "export EXCITED=true" or "export EXCITED=false" AND "export DATABASE_URL=sqlite:///app.db" before running app locally
