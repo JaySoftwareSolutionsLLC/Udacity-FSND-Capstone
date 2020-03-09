@@ -73,7 +73,7 @@ def create_app(test_config=None):
         response = {}
         cat = Category.query.get(category_id)
         try:
-            response['request'] = cat.format()
+            response['category'] = cat.format()
             response['success'] = True
         except:
             response['success'] = False

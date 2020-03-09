@@ -54,6 +54,7 @@ class Topic(db.Model):
   name = Column(String(16), nullable=False)
   description = Column(String(255), nullable=True)
   category_id = db.Column(db.Integer, db.ForeignKey('Category.id'), nullable=False)
+  concepts = db.relationship('Concept', backref='topic', lazy=True, cascade = 'all,delete-orphan')
 
   def __init__(self, name, description, category_id):
     self.name = name
@@ -61,8 +62,38 @@ class Topic(db.Model):
     self.category_id = category_id
 
   def format(self):
+    formatted_concepts = [c.format() for c in self.concepts]
     return {
       'id': self.id,
       'name': self.name,
       'description': self.description,
-      'category_id': self.category_id}
+      'category_id': self.category_id,
+      'concepts': formatted_concepts}
+
+'''
+Concept is the smallest unit of this application. It belongs to a single Topic.
+'''
+
+class Concept(db.Model):
+  __tablename__ = 'Concept'
+
+  id = Column(db.Integer, primary_key=True)
+  name = Column(String(64), nullable=False)
+  description = Column(String(1024), nullable=True)
+  url = Column(String(128), nullable=True)
+  topic_id = db.Column(db.Integer, db.ForeignKey('Topic.id'), nullable=False)
+
+  def __init__(self, name, description, url, topic_id):
+    self.name = name
+    self.description = description
+    self.url = url
+    self.topic_id = topic_id
+
+  def format(self):
+    return {
+      'id': self.id,
+      'name': self.name,
+      'description': self.description,
+      'url': self.url,
+      'topic_id': self.topic_id,
+      }
