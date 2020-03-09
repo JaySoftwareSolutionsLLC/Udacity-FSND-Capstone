@@ -25,8 +25,12 @@ def create_app(test_config=None):
 
     @app.route('/api/categories', methods=['GET'])
     def get_categories():
+        categories = Category.query.all()
+        formatted_categories = [category.format() for category in categories]
         return jsonify({
-            "success": True
+            "success": True,
+            "categories": formatted_categories,
+            "total_categories": len(formatted_categories)
         })
 
     @app.route('/api/categories', methods=['POST'])
