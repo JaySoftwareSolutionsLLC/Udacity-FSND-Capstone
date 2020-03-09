@@ -27,8 +27,8 @@ class Category(db.Model):
   __tablename__ = 'Category'
 
   id = Column(db.Integer, primary_key=True)
-  name = Column(String(16))
-  description = Column(String(1024))
+  name = Column(String(16), unique=True, nullable=False)
+  description = Column(String(1024), nullable=False)
 
   def __init__(self, name, description):
     self.name = name
