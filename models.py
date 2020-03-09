@@ -23,19 +23,19 @@ def setup_db(app, database_path=database_path):
 Person
 Have title and release year
 '''
-class Person(db.Model):  
-  __tablename__ = 'People'
+class Category(db.Model):  
+  __tablename__ = 'Category'
 
   id = Column(db.Integer, primary_key=True)
-  name = Column(String)
-  catchphrase = Column(String)
+  name = Column(String(16))
+  description = Column(String(1024))
 
-  def __init__(self, name, catchphrase=""):
+  def __init__(self, name, description):
     self.name = name
-    self.catchphrase = catchphrase
+    self.description = description
 
   def format(self):
     return {
       'id': self.id,
       'name': self.name,
-      'catchphrase': self.catchphrase}
+      'description': self.description}
