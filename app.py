@@ -1,8 +1,8 @@
 import os
 from flask import Flask, request, jsonify
-from models import setup_db, Category, db
 from flask_cors import CORS, cross_origin
 
+from models import setup_db, Category, db
 
 
 def create_app(test_config=None):
@@ -58,7 +58,7 @@ def create_app(test_config=None):
         category_to_delete = Category.query.get(category_id)
         try:
             response['request'] = category_to_delete.format()
-            category_to_delete.delete()
+            db.session.delete(category_to_delete)
             db.session.commit()
             response['success'] = True
         except:
