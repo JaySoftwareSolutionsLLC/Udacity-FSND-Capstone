@@ -35,9 +35,8 @@ class Category(db.Model):
     self.description = description
 
   def format(self):
-    formatted_topics = []
-    for t in self.topics:
-      formatted_topics.append(t.format())
+    # Create a formatted topics array for display purposes
+    formatted_topics = [t.format() for t in self.topics]
     return {
       'id': self.id,
       'name': self.name,
