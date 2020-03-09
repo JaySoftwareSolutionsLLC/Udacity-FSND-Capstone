@@ -68,6 +68,18 @@ def create_app(test_config=None):
             db.session.close()
             return jsonify(response)
 
+    @app.route('/api/categories/<int:category_id>', methods=['GET'])
+    def get_category_info(category_id):
+        response = {}
+        cat = Category.query.get(category_id)
+        try:
+            response['request'] = cat.format()
+            response['success'] = True
+        except:
+            response['success'] = False
+        finally:
+            return jsonify(response)
+
 
     return app
 

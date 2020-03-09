@@ -20,8 +20,7 @@ def setup_db(app, database_path=database_path):
 
 
 '''
-Person
-Have title and release year
+Category is the highest level of this application. 1 Category = 1 Cheat Sheet
 '''
 class Category(db.Model):  
   __tablename__ = 'Category'
@@ -29,13 +28,42 @@ class Category(db.Model):
   id = Column(db.Integer, primary_key=True)
   name = Column(String(16), unique=True, nullable=False)
   description = Column(String(1024), nullable=False)
+  topics = db.relationship('Topic', backref='category', lazy=True, cascade = 'all,delete-orphan')
 
   def __init__(self, name, description):
     self.name = name
     self.description = description
 
   def format(self):
+    formatted_topics = []
+    for t in self.topics:
+      formatted_topics.append(t.format())
     return {
       'id': self.id,
       'name': self.name,
-      'description': self.description}
+      'description': self.description,
+      'topics': formatted_topics }
+
+'''
+Topic is the middle level of this application. It belongs to a single Category. It has many Concepts that belong to it.
+'''
+
+class Topic(db.Model):
+  __tablename__ = 'Topic'
+
+  id = Column(db.Integer, primary_key=True)
+  name = Column(String(16), nullable=False)
+  description = Column(String(255), nullable=True)
+  category_id = db.Column(db.Integer, db.ForeignKey('Category.id'), nullable=False)
+
+  def __init__(self, name, description, category_id):
+    self.name = name
+    self.description = description
+    self.category_id = category_id
+
+  def format(self):
+    return {
+      'id': self.id,
+      'name': self.name,
+      'description': self.description,
+      'category_id': self.category_id}
