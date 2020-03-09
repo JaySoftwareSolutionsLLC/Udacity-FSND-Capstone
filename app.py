@@ -25,7 +25,15 @@ def create_app(test_config=None):
 
     @app.route('/categories', methods=['GET'])
     def display_categories():
-        return render_template('test.html')
+        categories = Category.query.all()
+        formatted_categories = [category.format() for category in categories]
+        return render_template('categories.html', cats=formatted_categories)
+
+    @app.route('/categories/<int:category_id>', methods=['GET'])
+    def display_cheatsheet(category_id):
+        cat = Category.query.get(category_id)
+        formatted_cat = cat.format()
+        return render_template('cheatsheet.html', cat=formatted_cat)
 
     ''' 
     API ENDPOINTS
