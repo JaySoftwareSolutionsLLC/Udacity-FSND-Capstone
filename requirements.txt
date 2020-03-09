@@ -7,3 +7,4 @@ Flask-Cors
 gunicorn
 xlrd
 psycopg2
+flask_script
