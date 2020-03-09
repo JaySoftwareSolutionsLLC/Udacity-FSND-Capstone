@@ -1,5 +1,5 @@
 import os
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, render_template
 from flask_cors import CORS, cross_origin
 
 from models import setup_db, Category, db
@@ -23,6 +23,13 @@ def create_app(test_config=None):
     def be_cool():
         return "Be cool, man, be coooool! You're almost a FSND grad!"
 
+    @app.route('/categories', methods=['GET'])
+    def display_categories():
+        return render_template('test.html')
+
+    ''' 
+    API ENDPOINTS
+    '''
     @app.route('/api/categories', methods=['GET'])
     def get_categories():
         categories = Category.query.all()
