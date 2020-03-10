@@ -112,6 +112,38 @@ def create_app(test_config=None):
             db.session.close()
             return jsonify(response)
 
+    '''
+    ERROR CODES
+    '''
+
+    # Forbidden
+    @app.errorhandler(403)
+    def not_found_error(error):
+        error_code = 403
+        error_msg = error
+        return render_template('errors/error.html', response={"errorCode" : error_code, "errorMsg" : error_msg}), 403
+
+    # Not found
+    @app.errorhandler(404)
+    def not_found_error(error):
+        error_code = 404
+        error_msg = error
+        return render_template('errors/error.html', response={"errorCode" : error_code, "errorMsg" : error_msg}), 404
+
+    # Method not allowed
+    @app.errorhandler(405)
+    def not_found_error(error):
+        error_code = 405
+        error_msg = error
+        return render_template('errors/error.html', response={"errorCode" : error_code, "errorMsg" : error_msg}), 405
+
+    # Internal server error
+    @app.errorhandler(500)
+    def not_found_error(error):
+        error_code = 500
+        error_msg = error
+        return render_template('errors/error.html', response={"errorCode" : error_code, "errorMsg" : error_msg}), 500
+
 
     return app
 
