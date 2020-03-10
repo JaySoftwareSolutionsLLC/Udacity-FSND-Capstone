@@ -100,7 +100,7 @@ class Concept(db.Model):
   __tablename__ = 'Concept'
 
   id = Column(db.Integer, primary_key=True)
-  name = Column(String(64), nullable=False)
+  name = Column(String(128), nullable=False)
   description = Column(String(1024), nullable=True)
   url = Column(String(128), nullable=True)
   topic_id = db.Column(db.Integer, db.ForeignKey('Topic.id'), nullable=False)
