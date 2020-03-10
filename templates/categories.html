@@ -1,14 +1,16 @@
 {% extends 'layouts/main.html' %}
 {% block title %}CheatSheets | Categories{% endblock %}
+{% block styles %}
+<link rel="stylesheet" href="/static/css/categories.css">
+{% endblock %}
 {% block content %}
-<h1>Categories</h1>
-<section style='display: flex; flex-flow: row wrap; width: 100%; justify-content: space-around;'>
+<h1>Categories <i class='fas fa-plus' title='New Category'></i></h1>
+<section>
     {% for cat in cats %}
-    <a href='/categories/{{ cat.id }}' style='display: flex; flex-flow: column nowrap; align-items: center; border: 1px solid black; width: 25%; border-radius: 1rem;'>
+    <a href='/categories/{{ cat.id }}' class='category'>
         <h2>{{ cat.name }}</h2>
         <p>{{ cat.description }}</p>
     </a>
     {% endfor %}
 </section>
-<button>New Category</button>
 {% endblock %}

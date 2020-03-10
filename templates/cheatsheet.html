@@ -1,26 +1,41 @@
-<!doctype html>
-<head>
-<meta charset="utf-8">
-<title></title>
-</head>
-<body>
-
-    <h1>{{ cat.name }}</h1>
-    <section style='display: flex; flex-flow: column wrap;'>
-        {% for t in cat.topics %}
-        <ul style='display: flex; flex-flow: column nowrap; align-items: center; border: 1px solid black; width: 25%; border-radius: 1rem;'>
-            <h3 style='margin: 0;'>{{ t.name }}</h3>
-            <p style='margin: 0;'>{{ t.description }}</p>
-            {% for c in t.concepts %} 
-            <li>
-                {% if c.url is not none %}<a target='_blank' href='{{ c.url }}'>{% endif %} 
+{% extends 'layouts/main.html' %}
+{% block title %}{{ cat.name }} Cheatsheet{% endblock %}
+{% block styles %}
+<link rel="stylesheet" href="/static/css/cheatsheet.css">
+<link rel="stylesheet" href="/static/css/libs/jquery-ui.css">
+{% endblock %}
+{% block scripts %}
+<script type="text/javascript" src="/static/js/libs/jquery.js"></script>
+<script type="text/javascript" src="/static/js/libs/jquery-ui.js"></script>
+<script defer>
+    // When you click on a concept name it copies it to clipboard
+    $.getScript("/static/js/libs/clipboard.min.js", function(){
+        //instance binding
+        new ClipboardJS('a.copy-to-clipboard');
+        $("a.copy-to-clipboard").on("click", function(event){
+            event.preventDefault();
+        });
+    });
+</script>
+{% endblock %}
+{% block content %}
+<h1>{{ cat.name }} <i class='fas fa-plus' title='New {{ cat.name }} Topic'></i></h1>
+<section>
+    {% for t in cat.topics %}
+    <ul class='topic'>
+        <i class='fas fa-plus' title='New {{ t.name }} Concept'></i>
+        <h3>{{ t.name }}<i class='fas fa-pencil-alt' title="Edit '{{ t.name }}'"></i></h3>
+        <p>{{ t.description }}</p>
+        {% for c in t.concepts %} 
+        <li>
+            {% if c.url is not none %}<a href='{{ c.url }}' target="_blank" title='visit website'><i class='fas fa-rocket'></i></a>{% endif %}
+            <a href='#'  title='Click to Copy' data-clipboard-text='{{ c.name }}' class='copy-to-clipboard' >
                 {{ c.name }}
-                {% if c.url is not none %}</a>{% endif %}
-            </li>
-            {% endfor %}
-        </ul>
+            </a>
+            <i class='fas fa-pencil-alt' title="Edit '{{ c.name }}'"></i>
+        </li>
         {% endfor %}
-    </section>
-    <button>New Topic</button>
-</body>
-</html>
+    </ul>
+    {% endfor %}
+</section>
+{% endblock %}

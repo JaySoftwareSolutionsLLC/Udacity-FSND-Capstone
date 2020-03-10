@@ -10,21 +10,24 @@
 <!-- /meta -->
 
 <!-- styles -->
+<link type="text/css" rel="stylesheet" href="/static/css/reset.css">
+<link href="https://fonts.googleapis.com/css?family=Dosis&display=swap" rel="stylesheet">
 <link type="text/css" rel="stylesheet" href="/static/css/main.css">
+<link type="text/css" rel="stylesheet" href="/static/css/libs/fontawesome/css/all.min.css">
+{% block styles %}{% endblock %}
 
 <!-- favicons -->
 
 <!-- scripts -->
+{% block scripts %}{% endblock %}
 
-<!--[if lt IE 9]><script src="/static/js/libs/respond-1.4.2.min.js"></script><![endif]-->
-<!-- /scripts -->
 </head>
 <body>
 
     <!-- Fixed navbar -->
     <header>
         <span class='left-side'>
-            <a href='/categories'>Home</a>
+            <a href='/categories'><i class="fas fa-home"></i></a>
         </span>
         <span class='right-side'>
             <i class="fas fa-user"></i>

@@ -1,4 +1,60 @@
+$headerheight: 3rem;
+$footerheight: 2rem;
 html {
     background: black;
     color: white;
+    font-family: 'Dosis', sans-serif; 
+    body {
+        padding: 0 2rem;
+        header {
+            position: fixed;
+            display: flex;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: $headerheight;
+            background: white;
+            color: black;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+            span {
+                vertical-align: middle;
+                i {
+                    cursor: pointer;
+                    color: black;
+                }
+            }
+        }
+        main {
+            h1 {
+                width: 100%;
+                font-size: 3rem;
+                text-align: center;
+                padding: 1rem 0 2rem 0;
+                i {
+                    font-size: 1rem;
+                    vertical-align: middle;
+                    border-radius: 1rem;
+                    border: 1px solid white;
+                    padding: 0.25rem;
+                    cursor: pointer;
+                }
+            }
+            margin-top: $headerheight;
+        }
+        footer {
+            position: fixed;
+            display: flex;
+            bottom: 0px;
+            left: 0px;
+            width: 100%;
+            height: $footerheight;
+            background: white;
+            color: black;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+    }
 }

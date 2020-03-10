@@ -275,3 +275,4 @@ if __name__ == '__main__':
     app.run()
 
 # Need to run "export EXCITED=true" or "export EXCITED=false" AND "export DATABASE_URL=sqlite:///app.db" OR "postgres://postgres:$u944jAk161519@localhost:5432/udacity_fsnd_capstone" before running app locally
+# Enhancement idea: Edit mode available to teachers only. Toggles whether CRUD functionality is possible.
