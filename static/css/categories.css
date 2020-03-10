@@ -1,0 +1,49 @@
+html body main section {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-flow: row wrap;
+          flex-flow: row wrap;
+  width: 100%;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+}
+
+html body main section a.category {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-flow: column nowrap;
+          flex-flow: column nowrap;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  border: 1px solid black;
+  width: 25%;
+  border-radius: 1rem;
+  background: white;
+  color: black;
+  text-decoration: none;
+  padding: 1rem;
+  width: 10rem;
+  height: 10rem;
+  background: rgba(255, 255, 255, 0.8);
+  color: black;
+}
+
+html body main section a.category:hover {
+  background: white;
+}
+
+html body main section a.category h2 {
+  font-size: 2rem;
+}
+
+html body main section a.category p {
+  font-size: 0.75rem;
+}
+/*# sourceMappingURL=categories.css.map */

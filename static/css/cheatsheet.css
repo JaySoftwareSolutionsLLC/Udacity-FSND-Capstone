@@ -1,0 +1,79 @@
+html body main section {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-flow: column wrap;
+          flex-flow: column wrap;
+}
+
+html body main section ul.topic {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  position: relative;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-flow: column nowrap;
+          flex-flow: column nowrap;
+  -webkit-box-align: start;
+      -ms-flex-align: start;
+          align-items: flex-start;
+  width: 20%;
+  border-radius: 1rem;
+  padding: 0.5rem;
+  margin: 1rem 0;
+  line-height: 1.4;
+  max-height: 20rem;
+  overflow: scroll;
+  background: rgba(255, 255, 255, 0.8);
+  color: black;
+}
+
+html body main section ul.topic:hover {
+  background: white;
+}
+
+html body main section ul.topic::-webkit-scrollbar {
+  width: 0px;
+  background: transparent;
+  /* make scrollbar transparent */
+}
+
+html body main section ul.topic i.fa-plus {
+  position: absolute;
+  top: 0.25rem;
+  right: 0.25rem;
+  font-size: 1rem;
+  vertical-align: middle;
+  border-radius: 1rem;
+  padding: 0.25rem;
+  cursor: pointer;
+}
+
+html body main section ul.topic h3 {
+  font-size: 1.5rem;
+  text-decoration: underline;
+}
+
+html body main section ul.topic h3 i {
+  font-size: 1rem;
+  padding: 0.5rem;
+}
+
+html body main section ul.topic p {
+  font-size: 0.75rem;
+  padding: 0 0 1rem 0;
+}
+
+html body main section ul.topic li {
+  font-size: 0.75rem;
+  white-space: nowrap;
+}
+
+html body main section ul.topic li a {
+  text-decoration: none;
+  color: black;
+}
+/*# sourceMappingURL=cheatsheet.css.map */

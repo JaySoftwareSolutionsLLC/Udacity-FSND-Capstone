@@ -125,5 +125,3 @@ dmypy.json
 .pyre/
 
 *.db
-
-static/*
