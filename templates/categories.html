@@ -1,19 +1,14 @@
-<!doctype html>
-<head>
-<meta charset="utf-8">
-<title></title>
-</head>
-<body>
-
-    <h1>Categories</h1>
-    <section style='display: flex; flex-flow: row wrap; width: 100%; justify-content: space-around;'>
-        {% for cat in cats %}
-        <a href='/categories/{{ cat.id }}' style='display: flex; flex-flow: column nowrap; align-items: center; border: 1px solid black; width: 25%; border-radius: 1rem;'>
-            <h2>{{ cat.name }}</h2>
-            <p>{{ cat.description }}</p>
-        </a>
-        {% endfor %}
-    </section>
-    <button>New Category</button>
-</body>
-</html>
+{% extends 'layouts/main.html' %}
+{% block title %}CheatSheets | Categories{% endblock %}
+{% block content %}
+<h1>Categories</h1>
+<section style='display: flex; flex-flow: row wrap; width: 100%; justify-content: space-around;'>
+    {% for cat in cats %}
+    <a href='/categories/{{ cat.id }}' style='display: flex; flex-flow: column nowrap; align-items: center; border: 1px solid black; width: 25%; border-radius: 1rem;'>
+        <h2>{{ cat.name }}</h2>
+        <p>{{ cat.description }}</p>
+    </a>
+    {% endfor %}
+</section>
+<button>New Category</button>
+{% endblock %}
