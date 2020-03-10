@@ -13,9 +13,9 @@
             <p style='margin: 0;'>{{ t.description }}</p>
             {% for c in t.concepts %} 
             <li>
-                {% if c.url is defined and c.url|length %}<a target='_blank' href='{{ c.url }}'>{% endif %} 
+                {% if c.url is not none %}<a target='_blank' href='{{ c.url }}'>{% endif %} 
                 {{ c.name }}
-                {% if c.url is defined and c.url|length %}</a>{% endif %}
+                {% if c.url is not none %}</a>{% endif %}
             </li>
             {% endfor %}
         </ul>

@@ -72,6 +72,17 @@ class Topic(db.Model):
     self.description = description
     self.category_id = category_id
 
+  def insert(self):
+      db.session.add(self)
+      db.session.commit()
+
+  def update(self):
+      db.session.commit()
+
+  def delete(self):
+      db.session.delete(self)
+      db.session.commit()
+
   def format(self):
     formatted_concepts = [c.format() for c in self.concepts]
     return {
@@ -100,6 +111,17 @@ class Concept(db.Model):
     self.url = url
     self.topic_id = topic_id
 
+  def insert(self):
+      db.session.add(self)
+      db.session.commit()
+
+  def update(self):
+      db.session.commit()
+
+  def delete(self):
+      db.session.delete(self)
+      db.session.commit()
+      
   def format(self):
     return {
       'id': self.id,
