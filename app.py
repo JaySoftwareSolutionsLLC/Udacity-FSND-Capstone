@@ -188,9 +188,10 @@ def create_app(test_config=None):
             new_concept.insert()
             response['new_concept'] = new_concept.format()
             response['success'] = True
-        except:
+        except Exception as err:
             db.session.rollback()
             response['success'] = False
+            response['error'] = f"{err.__class__.__name__}: {err}"
         finally:
             db.session.close()
             return jsonify(response)
