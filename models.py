@@ -34,6 +34,17 @@ class Category(db.Model):
     self.name = name
     self.description = description
 
+  def insert(self):
+      db.session.add(self)
+      db.session.commit()
+
+  def update(self):
+      db.session.commit()
+
+  def delete(self):
+      db.session.delete(self)
+      db.session.commit()
+
   def format(self):
     # Create a formatted topics array for display purposes
     formatted_topics = [t.format() for t in self.topics]
