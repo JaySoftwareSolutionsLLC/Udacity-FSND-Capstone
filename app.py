@@ -56,9 +56,8 @@ def create_app(test_config=None):
             description = request.json['description']
             new_category = Category(
                 name=name, description=description)
+            new_category.insert()
             response['request'] = new_category.format()
-            db.session.add(new_category)
-            db.session.commit()
             response['success'] = True
         except:
             db.session.rollback()
@@ -70,11 +69,10 @@ def create_app(test_config=None):
     @app.route('/api/categories/<int:category_id>', methods=['DELETE'])
     def delete_category(category_id):
         response = {}
-        category_to_delete = Category.query.get(category_id)
         try:
+            category_to_delete = Category.query.get(category_id)
+            category_to_delete.delete()
             response['request'] = category_to_delete.format()
-            db.session.delete(category_to_delete)
-            db.session.commit()
             response['success'] = True
         except:
             db.session.rollback()
