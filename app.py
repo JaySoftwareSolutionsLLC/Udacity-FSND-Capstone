@@ -4,7 +4,6 @@ from flask_cors import CORS, cross_origin
 
 from models import setup_db, Category, db
 
-
 def create_app(test_config=None):
 
     app = Flask(__name__)
@@ -22,6 +21,7 @@ def create_app(test_config=None):
     @app.route('/coolkids')
     def be_cool():
         return "Be cool, man, be coooool! You're almost a FSND grad!"
+
 
     @app.route('/categories', methods=['GET'])
     def display_categories():
@@ -91,6 +91,25 @@ def create_app(test_config=None):
         except:
             response['success'] = False
         finally:
+            return jsonify(response)
+
+    @app.route('/api/categories/<int:category_id>/edit', methods=['PATCH'])
+    def edit_category(category_id):
+        response = {}
+        try:
+            name = request.json['name']
+            description = request.json['description']
+            cat = Category.query.get(category_id)
+            cat.name = name
+            cat.description = description
+            cat.update()
+            response['category'] = cat.format()
+            response['success'] = True
+        except:
+            db.session.rollback()
+            response['success'] = False
+        finally:
+            db.session.close()
             return jsonify(response)
 
 
