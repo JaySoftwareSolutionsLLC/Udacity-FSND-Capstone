@@ -9,6 +9,6 @@ xlrd
 psycopg2
 flask_script
 flask_migrate
-urllib
+urllib.request
 jose
 functools
