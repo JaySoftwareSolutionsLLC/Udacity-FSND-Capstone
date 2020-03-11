@@ -3,6 +3,7 @@ from flask import Flask, request, jsonify, render_template
 from flask_cors import CORS, cross_origin
 
 from models import setup_db, db, Category, Topic, Concept
+from auth.auth import AuthError, requires_auth
 
 def create_app(test_config=None):
 
@@ -49,7 +50,8 @@ def create_app(test_config=None):
         })
 
     @app.route('/api/categories', methods=['POST'])
-    def create_category():
+    @requires_auth('create:any')
+    def create_category(jwt):
         response = {}
         try:
             name = request.json['name']
@@ -67,7 +69,8 @@ def create_app(test_config=None):
             return jsonify(response)
 
     @app.route('/api/categories/<int:category_id>', methods=['DELETE'])
-    def delete_category(category_id):
+    @requires_auth('delete:any')
+    def delete_category(jwt, category_id):
         response = {}
         try:
             category_to_delete = Category.query.get(category_id)
@@ -94,7 +97,8 @@ def create_app(test_config=None):
             return jsonify(response)
 
     @app.route('/api/categories/<int:category_id>/update', methods=['PATCH'])
-    def update_category(category_id):
+    @requires_auth('update:any')
+    def update_category(jwt, category_id):
         response = {}
         try:
             name = request.json['name']
@@ -116,7 +120,8 @@ def create_app(test_config=None):
     API ENDPOINTS - Topics
     '''
     @app.route('/api/topics', methods=['POST'])
-    def create_topic():
+    @requires_auth('create:any')
+    def create_topic(jwt):
         response = {}
         response['request'] = request.json
         try:
@@ -136,7 +141,8 @@ def create_app(test_config=None):
             return jsonify(response)
 
     @app.route('/api/topics/<int:topic_id>/update', methods=['PATCH'])
-    def update_topic(topic_id):
+    @requires_auth('update:any')
+    def update_topic(jwt, topic_id):
         response = {}
         try:
             name = request.json['name']
@@ -157,7 +163,8 @@ def create_app(test_config=None):
             return jsonify(response)
 
     @app.route('/api/topics/<int:topic_id>', methods=['DELETE'])
-    def delete_topic(topic_id):
+    @requires_auth('delete:any')
+    def delete_topic(jwt, topic_id):
         response = {}
         try:
             topic_to_delete = Topic.query.get(topic_id)
@@ -175,7 +182,8 @@ def create_app(test_config=None):
     API ENDPOINTS - Concepts
     '''
     @app.route('/api/concepts', methods=['POST'])
-    def create_concept():
+    @requires_auth('create:any')
+    def create_concept(jwt):
         response = {}
         response['request'] = request.json
         try:
@@ -197,7 +205,8 @@ def create_app(test_config=None):
             return jsonify(response)
 
     @app.route('/api/concepts/<int:concept_id>/update', methods=['PATCH'])
-    def update_concept(concept_id):
+    @requires_auth('update:any')
+    def update_concept(jwt, concept_id):
         response = {}
         try:
             name = request.json['name']
@@ -220,7 +229,8 @@ def create_app(test_config=None):
             return jsonify(response)
 
     @app.route('/api/concepts/<int:concept_id>', methods=['DELETE'])
-    def delete_concept(concept_id):
+    @requires_auth('delete:any')
+    def delete_concept(jwt, concept_id):
         response = {}
         try:
             concept_to_delete = Concept.query.get(concept_id)
@@ -267,6 +277,13 @@ def create_app(test_config=None):
         return render_template('errors/error.html', response={"errorCode" : error_code, "errorMsg" : error_msg}), 500
 
 
+    @app.errorhandler(AuthError)
+    def handle_auth_error(ex):
+        print(jsonify(ex.error))
+        response = jsonify(ex.error)
+        response.status_code = ex.status_code
+        return response 
+
     return app
 
 app = create_app()
@@ -276,3 +293,4 @@ if __name__ == '__main__':
 
 # Need to run "export EXCITED=true" or "export EXCITED=false" AND "export DATABASE_URL=sqlite:///app.db" OR "postgres://postgres:$u944jAk161519@localhost:5432/udacity_fsnd_capstone" before running app locally
 # Enhancement idea: Edit mode available to teachers only. Toggles whether CRUD functionality is possible.
+# May need to update requirements file for auth.py to work on production server
