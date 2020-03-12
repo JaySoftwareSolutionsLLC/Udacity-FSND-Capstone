@@ -13,7 +13,7 @@ class TriviaTestCase(unittest.TestCase):
         """Define test variables and initialize app."""
         self.app = create_app()
         self.client = self.app.test_client
-        self.database_path = 'sqlite:///app.db'
+        self.database_path = 'sqlite:///test.db'
 
         # binds the app to the current context
         with self.app.app_context():
