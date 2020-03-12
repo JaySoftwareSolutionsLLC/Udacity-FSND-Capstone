@@ -241,6 +241,13 @@ def create_app(test_config=None):
     '''
 
     # Forbidden
+    @app.errorhandler(401)
+    def not_found_error(error):
+        error_code = 401
+        error_msg = error
+        return render_template('errors/error.html', response={"errorCode" : error_code, "errorMsg" : error_msg}), 401
+
+    # Forbidden
     @app.errorhandler(403)
     def not_found_error(error):
         error_code = 403
