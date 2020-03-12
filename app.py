@@ -3,7 +3,7 @@ from flask import Flask, request, jsonify, render_template
 from flask_cors import CORS, cross_origin
 
 from models import setup_db, db, Category, Topic, Concept
-from .auth.auth import AuthError, requires_auth
+from auth.auth import AuthError, requires_auth
 
 def create_app(test_config=None):
 
