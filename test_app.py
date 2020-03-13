@@ -40,7 +40,7 @@ class CheatSheetTestCases(unittest.TestCase):
     '''
 
     def test_always_true(self):
-        self.assertTrue(True)
+        self.assertTrue(False)
 
     # Front End Testing
 
