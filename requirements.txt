@@ -9,4 +9,4 @@ xlrd
 psycopg2
 flask_script
 flask_migrate
-jose
+python-jose
