@@ -30,7 +30,7 @@ def create_app(test_config=None):
 
     ''' 
     API ENDPOINTS - Categories
-    '''
+    '''   
     @app.route('/api/categories', methods=['GET'])
     def get_categories():
         categories = Category.query.all()
@@ -51,7 +51,7 @@ def create_app(test_config=None):
             new_category = Category(
                 name=name, description=description)
             new_category.insert()
-            response['request'] = new_category.format()
+            response['category'] = new_category.format()
             response['success'] = True
         except:
             db.session.rollback()
@@ -67,7 +67,7 @@ def create_app(test_config=None):
         try:
             category_to_delete = Category.query.get(category_id)
             category_to_delete.delete()
-            response['request'] = category_to_delete.format()
+            response['category'] = category_to_delete.format()
             response['success'] = True
         except:
             db.session.rollback()
@@ -123,7 +123,7 @@ def create_app(test_config=None):
             new_topic = Topic(
                 name=name, description=description, category_id=int(category_id))
             new_topic.insert()
-            response['new_topic'] = new_topic.format()
+            response['topic'] = new_topic.format()
             response['success'] = True
         except:
             db.session.rollback()
@@ -161,7 +161,7 @@ def create_app(test_config=None):
         try:
             topic_to_delete = Topic.query.get(topic_id)
             topic_to_delete.delete()
-            response['request'] = topic_to_delete.format()
+            response['topic'] = topic_to_delete.format()
             response['success'] = True
         except:
             db.session.rollback()
@@ -186,7 +186,7 @@ def create_app(test_config=None):
             new_concept = Concept(
                 name=name, description=description, url=url, topic_id=int(topic_id))
             new_concept.insert()
-            response['new_concept'] = new_concept.format()
+            response['concept'] = new_concept.format()
             response['success'] = True
         except Exception as err:
             db.session.rollback()
@@ -227,7 +227,7 @@ def create_app(test_config=None):
         try:
             concept_to_delete = Concept.query.get(concept_id)
             concept_to_delete.delete()
-            response['request'] = concept_to_delete.format()
+            response['concept'] = concept_to_delete.format()
             response['success'] = True
         except:
             db.session.rollback()
