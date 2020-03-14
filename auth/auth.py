@@ -9,11 +9,13 @@ AUTH0_DOMAIN = 'bjb.auth0.com'
 ALGORITHMS = ['RS256']
 API_AUDIENCE = 'cheatsheet'
 
-## AuthError Exception
+# AuthError Exception
 '''
 AuthError Exception
 A standardized way to communicate auth failure modes
 '''
+
+
 class AuthError(Exception):
     def __init__(self, error, status_code):
         self.error = error
@@ -50,7 +52,8 @@ def get_token_auth_header():
             'description': 'Authorization header must be bearer token.'
         }, 401)
     token = parts[1]
-    return token # return the token
+    return token  # return the token
+
 
 def check_permissions(permission, payload):
     if 'permissions' not in payload:
@@ -60,12 +63,14 @@ def check_permissions(permission, payload):
         }, 401)
         # abort(400) # No permissions component to payload
     if permission not in payload['permissions']:
+        desc_str = 'User does not have permissions to take that action.'
         raise AuthError({
             'code': 'insufficient_permissions',
-            'description': 'User does not have permissions to take that action.'
+            'description': desc_str
         }, 401)
         # abort(403) # We know who you are, but you are denied
-    return True  
+    return True
+
 
 def verify_decode_jwt(token):
     jsonurl = urlopen(f'https://{AUTH0_DOMAIN}/.well-known/jwks.json')
@@ -106,9 +111,10 @@ def verify_decode_jwt(token):
             }, 401)
 
         except jwt.JWTClaimsError:
+            desc_str = 'Incorrect claims. Please, check audience and issuer.'
             raise AuthError({
                 'code': 'invalid_claims',
-                'description': 'Incorrect claims. Please, check the audience and issuer.'
+                'description': desc_str
             }, 401)
         except Exception:
             raise AuthError({
@@ -119,6 +125,7 @@ def verify_decode_jwt(token):
                 'code': 'invalid_header',
                 'description': 'Unable to find the appropriate key.'
             }, 401)
+
 
 def requires_auth(permission=''):
     def requires_auth_decorator(f):

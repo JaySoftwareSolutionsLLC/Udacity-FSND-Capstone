@@ -5,6 +5,7 @@ from flask_cors import CORS, cross_origin
 from models import setup_db, db, Category, Topic, Concept
 from auth.auth import AuthError, requires_auth
 
+
 def create_app(test_config=None):
 
     app = Flask(__name__)
@@ -28,9 +29,9 @@ def create_app(test_config=None):
         formatted_cat = cat.format()
         return render_template('cheatsheet.html', cat=formatted_cat)
 
-    ''' 
+    '''
     API ENDPOINTS - Categories
-    '''   
+    '''
     @app.route('/api/categories', methods=['GET'])
     def get_categories():
         categories = Category.query.all()
@@ -121,7 +122,9 @@ def create_app(test_config=None):
             description = request.json['description']
             category_id = request.json['category_id']
             new_topic = Topic(
-                name=name, description=description, category_id=int(category_id))
+                name=name,
+                description=description,
+                category_id=int(category_id))
             new_topic.insert()
             response['topic'] = new_topic.format()
             response['success'] = True
@@ -139,8 +142,6 @@ def create_app(test_config=None):
         try:
             name = request.json['name']
             description = request.json['description']
-            # Intentionally not allowing Topic to be reassigned to different Category here. 
-            # Perhaps future enhancement could have migration / copy to category functionality
             top = Topic.query.get(topic_id)
             top.name = name
             top.description = description
@@ -184,7 +185,10 @@ def create_app(test_config=None):
             url = request.json['url']
             topic_id = request.json['topic_id']
             new_concept = Concept(
-                name=name, description=description, url=url, topic_id=int(topic_id))
+                name=name,
+                description=description,
+                url=url,
+                topic_id=int(topic_id))
             new_concept.insert()
             response['concept'] = new_concept.format()
             response['success'] = True
@@ -204,8 +208,6 @@ def create_app(test_config=None):
             name = request.json['name']
             description = request.json['description']
             url = request.json['url']
-            # Intentionally not allowing Concept to be reassigned to different Topic here. 
-            # Perhaps future enhancement could have migration / copy to topic functionality
             concept = Concept.query.get(concept_id)
             concept.name = name
             concept.description = description
@@ -245,45 +247,55 @@ def create_app(test_config=None):
     def not_found_error(error):
         error_code = 401
         error_msg = error
-        return render_template('errors/error.html', response={"errorCode" : error_code, "errorMsg" : error_msg}), 401
+        return render_template('errors/error.html',
+                               response={"errorCode": error_code,
+                                         "errorMsg": error_msg}), 401
 
     # Forbidden
     @app.errorhandler(403)
     def not_found_error(error):
         error_code = 403
         error_msg = error
-        return render_template('errors/error.html', response={"errorCode" : error_code, "errorMsg" : error_msg}), 403
+        return render_template('errors/error.html',
+                               response={"errorCode": error_code,
+                                         "errorMsg": error_msg}), 403
 
     # Not found
     @app.errorhandler(404)
     def not_found_error(error):
         error_code = 404
         error_msg = error
-        return render_template('errors/error.html', response={"errorCode" : error_code, "errorMsg" : error_msg}), 404
+        return render_template('errors/error.html',
+                               response={"errorCode": error_code,
+                                         "errorMsg": error_msg}), 404
 
     # Method not allowed
     @app.errorhandler(405)
     def not_found_error(error):
         error_code = 405
         error_msg = error
-        return render_template('errors/error.html', response={"errorCode" : error_code, "errorMsg" : error_msg}), 405
+        return render_template('errors/error.html',
+                               response={"errorCode": error_code,
+                                         "errorMsg": error_msg}), 405
 
     # Internal server error
     @app.errorhandler(500)
     def not_found_error(error):
         error_code = 500
         error_msg = error
-        return render_template('errors/error.html', response={"errorCode" : error_code, "errorMsg" : error_msg}), 500
-
+        return render_template('errors/error.html',
+                               response={"errorCode": error_code,
+                                         "errorMsg": error_msg}), 500
 
     @app.errorhandler(AuthError)
     def handle_auth_error(ex):
         print(jsonify(ex.error))
         response = jsonify(ex.error)
         response.status_code = ex.status_code
-        return response 
+        return response
 
     return app
+
 
 app = create_app()
 
