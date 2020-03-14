@@ -48,6 +48,11 @@ App is hosted on Heroku and can be found at: https://flask-test-4.herokuapp.com/
 
 ## Authorization
 Application uses Auth0 to provide 3rd party authentication
+Steps to receive an access token:
+1) Navigate to https://bjb.auth0.com/authorize?audience=cheatsheet&response_type=token&client_id=tJQnGJ8VZ8s1QqbhcvE5bbHJ94HQQvEO&redirect_uri=https://flask-test-4.herokuapp.com/categories
+2) Login with one of these two accounts:
+   1) student@gmail.com | Student1234
+   2) teacher@gmail.com | Teacher1234
 
 ## API
 
@@ -61,9 +66,356 @@ Represents a student of a given course. They are only able to view (read) cheats
 
 ### Endpoints
 
-### JWTs
-Teacher JWT: (will expire April 12th 2020 @ 4:52pm EST)
-eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IlJFWXpNVVJDT0RBMU16RTRNak5DTVRBd056Y3dOVEU1TmpNME9VSkVSVGM0UmpjelJqTXhNdyJ9.eyJpc3MiOiJodHRwczovL2JqYi5hdXRoMC5jb20vIiwic3ViIjoiZ29vZ2xlLW9hdXRoMnwxMDIwNzY1MTYxMjg2ODU5MTEwNDQiLCJhdWQiOlsiY2hlYXRzaGVldCIsImh0dHBzOi8vYmpiLmF1dGgwLmNvbS91c2VyaW5mbyJdLCJpYXQiOjE1ODQxMzI4MTIsImV4cCI6MTU4NDIxOTIxMCwiYXpwIjoidEpRbkdKOFZaOHMxUXFiaGN2RTViYkhKOTRIUVF2RU8iLCJzY29wZSI6Im9wZW5pZCBwcm9maWxlIGVtYWlsIiwicGVybWlzc2lvbnMiOlsiY3JlYXRlOmFueSIsImRlbGV0ZTphbnkiLCJ1cGRhdGU6YW55Il19.eKRjc4mw36kDys9kqf_1-5q52LWRUHb0CxtX4QNqGzNOxusct5r3KcO4UKKYD9AVT284RQHtbo2k-nbF4pk9xJKlcU8dosJDiVZJ3ZYC7dQzbvMbRnsbBcFuV9HhvHFcwOzzWh9wPu_ZXHRi0UvusMOSAPACtiCWXjam72uM_y3KOpZqzwHTHCIFbwlKnGSTeGCpv8DiP6wPz_9Yc3SWi4Irr7kEz9WYbGIAKjt4uDg-lQttOxmdaJUr629R4v2R420YsSb5vG7_-16NVXELCafwR6WjlVMBNC1Qoc6ewkYWy6Zj0f0YTn9z3_RURb7dcKLzZpnhxXd5KXMQGyNlTQ
+#### Category endpoints
+Category endpoints allow Teachers to perform CRUD maintenance on Categories
 
-Student JWT: (will expire Mar 14th 2020 @ 4:44pm EST)
-eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IlJFWXpNVVJDT0RBMU16RTRNak5DTVRBd056Y3dOVEU1TmpNME9VSkVSVGM0UmpjelJqTXhNdyJ9.eyJpc3MiOiJodHRwczovL2JqYi5hdXRoMC5jb20vIiwic3ViIjoiYXV0aDB8NWRmOTUxZGEyZDIzZjIwZThhZWU3NTU5IiwiYXVkIjoiY2hlYXRzaGVldCIsImlhdCI6MTU4NDEzMjI0NiwiZXhwIjoxNTg0MjE4NjQ0LCJhenAiOiJ0SlFuR0o4Vlo4czFRcWJoY3ZFNWJiSEo5NEhRUXZFTyIsInNjb3BlIjoiIiwicGVybWlzc2lvbnMiOltdfQ.SWyGwlsdVJPrbQ512AKeetf7icYwbzyUB9THcjxGOM1JmEXBxl9rApPlHILpxh2_AJqDBs2Q8qAsykoMqBaOeyJbi0oYtQC8KQe4JqJxPWZSt67xDlORCTI01IZFUJjRksFB3BJzaS645OnBlDo3moLeR1Mvq-znbrUTD8jdqeb8F-PeLUONypZgEdzZ1n7xLibZBkqoWLJLZaEsY8d7mMnQGY-tKC3Rd3zxup7nkSHY3o0rG0zEGbjh_xgs4EGUTYaij-afVf_7KqVmv-CDKHmi6jdkRjZhPCEOQ1_7oIcmfFNaLDp-ycbMJ8HVdFrTVryLUx2zzP3slJZ3btyjYA
+
+##### GET ALL CATEGORIES
+endpoint: /api/categories
+method: GET
+permissions: No permissions required
+response: 
+```JSON
+{
+    "categories": [
+        {
+            "description": "Flask application development cheat sheet",
+            "id": 1,
+            "name": "Flask",
+            "topics": [
+                {
+                    "category_id": 1,
+                    "concepts": [],
+                    "description": "Python Flask Programming Best Practices",
+                    "id": 1,
+                    "name": "Best Practices"
+                },
+                {
+                    "category_id": 1,
+                    "concepts": [
+                        {
+                            "description": "Export a DATABASE_URL variable locally which can then be retrieved by importing os. This will connect application to <name.db>",
+                            "id": 1,
+                            "name": "export DATABASE_URL=sqlite:///<name.db>",
+                            "topic_id": 2,
+                            "url": "https://flask.palletsprojects.com/en/1.1.x/patterns/sqlite3/"
+                        },
+                        {
+                            "description": "Export a DATABASE_URL variable locally which can then be retrieved by importing os. This will connect application to <data_base_name>",
+                            "id": 2,
+                            "name": "export DATABASE_URL=postgres://<u>:<p>@localhost:<p>/<db>",
+                            "topic_id": 2,
+                            "url": null
+                        }
+                    ],
+                    "description": "How to connect to databases inside of using Python Flask",
+                    "id": 2,
+                    "name": "Database Conn."
+                },
+                {
+                    "category_id": 1,
+                    "concepts": [],
+                    "description": "Establishing endpoints inside of a Flask Application",
+                    "id": 3,
+                    "name": "Routing"
+                }
+            ]
+        },
+        {
+            "description": "Python development cheat sheet",
+            "id": 2,
+            "name": "Python",
+            "topics": []
+        },
+        {
+            "description": "Cheat sheet for Udacity specific content",
+            "id": 3,
+            "name": "Udacity",
+            "topics": []
+        }
+    ],
+    "success": true,
+    "total_categories": 4
+}
+```
+
+##### CREATE CATEGORY
+endpoint: /api/categories
+method: POST
+permissions: "create:any"
+request:
+```JSON
+{
+	"name" : "test-name",
+	"description" : "test-desc"
+}
+```
+response: 
+```JSON
+{
+    "request": {
+        "description": "test-desc",
+        "id": 5,
+        "name": "test-name-2",
+        "topics": []
+    },
+    "success": true
+}
+```
+
+##### UPDATE CATEGORY
+endpoint: /api/categories/<int:category_id>/update
+method: PATCH
+permissions: "update:any"
+request:
+```JSON
+{
+	"name" : "Udacity-TEST",
+	"description" : "Cheat sheet for Udacity specific content"
+}
+```
+response: 
+```JSON
+{
+    "category": {
+        "description": "Cheat sheet for Udacity specific content",
+        "id": 5,
+        "name": "Udacity-TEST",
+        "topics": []
+    },
+    "success": true
+}
+```
+
+##### DELETE CATEGORY
+endpoint: /api/categories/<int:category_id>
+method: DELETE
+permissions: "delete:any"
+response: 
+```JSON
+{
+    "request": {
+        "description": "Cheat sheet for Udacity specific content",
+        "id": 5,
+        "name": "Udacity-TEST",
+        "topics": []
+    },
+    "success": true
+}
+```
+
+##### GET SINGLE CATEGORY
+endpoint: /api/categories/<int:category_id>
+method: GET
+permissions: No permissions required
+response: 
+```JSON
+{
+    "category": {
+        "description": "Flask application development cheat sheet",
+        "id": 1,
+        "name": "Flask",
+        "topics": [
+            {
+                "category_id": 1,
+                "concepts": [],
+                "description": "Python Flask Programming Best Practices",
+                "id": 1,
+                "name": "Best Practices"
+            },
+            {
+                "category_id": 1,
+                "concepts": [
+                    {
+                        "description": "Export a DATABASE_URL variable locally which can then be retrieved by importing os. This will connect application to <name.db>",
+                        "id": 1,
+                        "name": "export DATABASE_URL=sqlite:///<name.db>",
+                        "topic_id": 2,
+                        "url": "https://flask.palletsprojects.com/en/1.1.x/patterns/sqlite3/"
+                    },
+                    {
+                        "description": "Export a DATABASE_URL variable locally which can then be retrieved by importing os. This will connect application to <data_base_name>",
+                        "id": 2,
+                        "name": "export DATABASE_URL=postgres://<u>:<p>@localhost:<p>/<db>",
+                        "topic_id": 2,
+                        "url": null
+                    }
+                ],
+                "description": "How to connect to databases inside of using Python Flask",
+                "id": 2,
+                "name": "Database Conn."
+            },
+            {
+                "category_id": 1,
+                "concepts": [],
+                "description": "Establishing endpoints inside of a Flask Application",
+                "id": 3,
+                "name": "Routing"
+            }
+        ]
+    },
+    "success": true
+}
+```
+
+#### Topic Endpoints
+
+##### CREATE TOPIC
+endpoint: /api/topics
+method: POST
+permissions: "create:any"
+request:
+```JSON
+{
+	"name" : "test-topic",
+	"description" : "test-topic-desc",
+	"category_id": 1
+}
+```
+response: 
+```JSON
+{
+    "new_topic": {
+        "category_id": 1,
+        "concepts": [],
+        "description": "test-topic-desc",
+        "id": 4,
+        "name": "test-topic"
+    },
+    "request": {
+        "category_id": 1,
+        "description": "test-topic-desc",
+        "name": "test-topic"
+    },
+    "success": true
+}
+```
+
+##### UPDATE TOPIC
+endpoint: /api/topics/<int:topic_id>/update
+method: PATCH
+permissions: "update:any"
+request:
+```JSON
+{
+	"name" : "test-topic-E",
+	"description" : "test-topic-desc"
+}
+```
+response: 
+```JSON
+{
+    "success": true,
+    "topic": {
+        "category_id": 1,
+        "concepts": [],
+        "description": "test-topic-desc",
+        "id": 4,
+        "name": "test-topic-E"
+    }
+}
+```
+
+##### DELETE TOPIC
+endpoint: /api/topics/<int:topic_id>
+method: DELETE
+permissions: "delete:any"
+response: 
+```JSON
+{
+    "request": {
+        "category_id": 1,
+        "concepts": [],
+        "description": "test-topic-desc",
+        "id": 4,
+        "name": "test-topic-E"
+    },
+    "success": true
+}
+```
+
+#### Concept Endpoints
+
+##### CREATE CONCEPT
+endpoint: /api/concepts
+method: POST
+permissions: "create:any"
+request:
+```JSON
+{
+	"name" : "test-concept",
+	"description" : "test-concept-desc",
+	"topic_id": 1,
+	"url": "https://testurl.com"
+}
+```
+response: 
+```JSON
+{
+    "new_concept": {
+        "description": "test-concept-desc",
+        "id": 3,
+        "name": "test-concept",
+        "topic_id": 1,
+        "url": "https://testurl.com"
+    },
+    "request": {
+        "description": "test-concept-desc",
+        "name": "test-concept",
+        "topic_id": 1,
+        "url": "https://testurl.com"
+    },
+    "success": true
+}
+```
+
+##### UPDATE CONCEPT
+endpoint: /api/concepts/<int:concept_id>/update
+method: PATCH
+permissions: "update:any"
+request:
+```JSON
+{
+	"name" : "test-concept-E",
+	"description" : "test-concept-desc",
+	"url": "https://testurl.com"
+}
+```
+response: 
+```JSON
+{
+    "concept": {
+        "description": "test-concept-desc",
+        "id": 3,
+        "name": "test-concept-E",
+        "topic_id": 1,
+        "url": "https://testurl.com"
+    },
+    "success": true
+}
+```
+
+##### DELETE CONCEPT
+endpoint: /api/concepts/<int:concept_id>
+method: DELETE
+permissions: "delete:any"
+response: 
+```JSON
+{
+    "request": {
+        "description": "test-concept-desc",
+        "id": 3,
+        "name": "test-concept-E",
+        "topic_id": 1,
+        "url": "https://testurl.com"
+    },
+    "success": true
+}
+```
+
+### JWTs
+Teacher JWT: (will expire Mar 15th 2020 @ 2:33pm EST)
+eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IlJFWXpNVVJDT0RBMU16RTRNak5DTVRBd056Y3dOVEU1TmpNME9VSkVSVGM0UmpjelJqTXhNdyJ9.eyJpc3MiOiJodHRwczovL2JqYi5hdXRoMC5jb20vIiwic3ViIjoiYXV0aDB8NWU2ZDIyZGExMDg4NWIwY2E2YTg1NjllIiwiYXVkIjoiY2hlYXRzaGVldCIsImlhdCI6MTU4NDIxMDc5MiwiZXhwIjoxNTg0Mjk3MTkyLCJhenAiOiJ0SlFuR0o4Vlo4czFRcWJoY3ZFNWJiSEo5NEhRUXZFTyIsInNjb3BlIjoiIiwicGVybWlzc2lvbnMiOlsiY3JlYXRlOmFueSIsImRlbGV0ZTphbnkiLCJ1cGRhdGU6YW55Il19.KDtic9q5Nr07pxnIDnRcFz6qizZYZeUQwHT91EAMiUlUvaT7sW0hDZZp4ZS_55csYlDpADKDMJ1Kt0AkKnyz7bX6-Ttc-91OdGTGKF3ARpXuaQOCxiqJaM_zqmiTkdNB4dxaCS2FBXdY6RToxChcNaxd4vcz3CZHoWRr5THSMkRffjS1k23Y9p2q4X09y3zrXE64-o9T_BJs7vqyerDGfv06qq6_7iJLRVGTzFHqB8odN0E0EaaHXs91fNAbAncy11FS8ccreIc3XVLzqdL8DHT5HNJ1Tcfd1MBSFLWob6QilszOcYuMBMS7-oLk8h2HrGwRIWBrGhM4Q-whsSokGA
+
+Student JWT: (will expire Mar 15th 2020 @ 2:39pm EST)
+eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IlJFWXpNVVJDT0RBMU16RTRNak5DTVRBd056Y3dOVEU1TmpNME9VSkVSVGM0UmpjelJqTXhNdyJ9.eyJpc3MiOiJodHRwczovL2JqYi5hdXRoMC5jb20vIiwic3ViIjoiYXV0aDB8NWU2ZDIyOTAwODQ1NzEwYzkyMjE0OGUzIiwiYXVkIjoiY2hlYXRzaGVldCIsImlhdCI6MTU4NDIxMTE0NSwiZXhwIjoxNTg0Mjk3NTQ1LCJhenAiOiJ0SlFuR0o4Vlo4czFRcWJoY3ZFNWJiSEo5NEhRUXZFTyIsInNjb3BlIjoiIiwicGVybWlzc2lvbnMiOltdfQ.JJDIBm5x9KiZxCOpp4HDYl5Rcduz3XgxTBLEyyNfMUuZlUfrx-HiH6gEoAlC5RHDlIdcJJad5whL1sgePJ43RZZRZS5gHruxAGl-mw1x4rbWQG3P16yRpX9zIHOJ0IRE98zsXxoNL1NdCthkh22RhCFHkquSxwPMBtRGKriGQHLFEWKFUWjlSoZeQW0gnjR33R7hTfkqejVhIYCJ7u1szB2gJL7E3KVmFtdUHdOoPLWpPbGgkyuWpN7uoJ3Wg1iOK4HyGGBFzUKqTPU3spo0BM9k0rmyQn_8hDDrq5Dd1LFQuzP6gzq4WvHcgwca87S9iT-oGnfq2dC3rXBbfZpFnA
