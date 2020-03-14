@@ -1,6 +1,11 @@
 # CheatSheet Application
 Udacity Full Stack Nanodegree Capstone Project
 
+## Acknowledgements
+- Udacity has provided a substantial amount of the learning that made this application possible
+- Error pages have been forked from https://codepen.io/hellochad/pen/weMpgE
+- Would not have been possible without the help and support of an exceptional software development community
+  
 ## Purpose
 This is a cheat-sheet application developed to give classroom teachers the ability to create interactive web-based cheat sheet(s) for his/her students for any categories that they see fit. The basic workflow is that a teacher upon being setup in Auth0 is able to create new Categories for cheat sheets. Each of those Categories then can be turned into its own cheat sheet. The cheat sheet consists of a bunch of Concepts that the teacher wants the students to be able to see grouped together into Topics. 
 
