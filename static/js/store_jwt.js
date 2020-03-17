@@ -6,6 +6,8 @@ for(var i = 0; i < hashes.length; i++)
     vars.push(hash[0]);
     vars[hash[0]] = hash[1];
 }
-let jwt = vars['http://localhost:5000/categories#access_token'];
-console.log(jwt);
-localStorage.setItem("jwt", jwt);
+if (vars['http://localhost:5000/categories#access_token']) {
+    let jwt = vars['http://localhost:5000/categories#access_token'];
+    console.log(jwt);
+    localStorage.setItem("jwt", jwt);
+}
