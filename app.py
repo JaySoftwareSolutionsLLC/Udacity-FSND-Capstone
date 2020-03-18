@@ -4,14 +4,18 @@ from flask_cors import CORS, cross_origin
 
 from models import setup_db, db, Category, Topic, Concept
 from auth.auth import AuthError, requires_auth
+from config import Config
+
+from forms import LoginForm
 
 
 def create_app(test_config=None):
 
     app = Flask(__name__)
     setup_db(app)
-    # CORS(app)
     cors = CORS(app, resources={r"/api/*": {"origins": "*"}})
+    app.config.from_object(Config)
+    # app.config['SECRET_KEY']
 
     @app.route('/')
     def get_greeting():
@@ -237,6 +241,11 @@ def create_app(test_config=None):
         finally:
             db.session.close()
             return jsonify(response)
+
+    @app.route('/login')
+    def login():
+        form = LoginForm()
+        return render_template('form.html', form=form)
 
     '''
     ERROR CODE HANDLING
