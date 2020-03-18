@@ -1,0 +1,14 @@
+<h2>Create Category</h2>
+<form action="/api/categories" method="post" novalidate>
+    {{ form.hidden_tag() }}
+    <p>
+        {{ form.name.label }}<br>
+        {{ form.name(size=16) }}
+    </p>
+    <p>
+        {{ form.description.label }}<br>
+        {{ form.description() }}
+    </p>
+    <p>{{ form.submit() }}</p>
+</form>
+<!-- May be able to turn this into one generic form that loops through object properties -->

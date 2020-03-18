@@ -6,7 +6,7 @@ from models import setup_db, db, Category, Topic, Concept
 from auth.auth import AuthError, requires_auth
 from config import Config
 
-from forms import LoginForm
+from forms import CategoryForm
 
 
 def create_app(test_config=None):
@@ -244,8 +244,17 @@ def create_app(test_config=None):
 
     @app.route('/login')
     def login():
-        form = LoginForm()
-        return render_template('form.html', form=form)
+        form = CategoryForm()
+        return render_template('category_form.html', form=form)
+
+    @app.route('/request_form_data', methods=['POST'])
+    def request_form_data():
+        model = request.json['model']
+        form_type = request.json['formType']
+        if (model == 'category' and form_type == 'create'):
+            form = CategoryForm()
+            return render_template('category_form.html', form=form)
+
 
     '''
     ERROR CODE HANDLING

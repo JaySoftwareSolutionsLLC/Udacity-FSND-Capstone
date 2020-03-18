@@ -57,6 +57,51 @@ html body main h1 i {
   cursor: pointer;
 }
 
+html body div#modal {
+  display: none;
+  border: 0.25rem solid white;
+  max-height: 75%;
+  width: 30%;
+  position: fixed;
+  -o-object-position: center;
+     object-position: center;
+  top: 25%;
+  left: 35%;
+  background: rgba(0, 0, 0, 0.9);
+  border-radius: 1rem;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-flow: column;
+          flex-flow: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+  padding: 2rem;
+}
+
+html body div#modal h2 {
+  font-size: 2rem;
+}
+
+html body div#modal form {
+  width: 100%;
+}
+
+html body div#modal form p {
+  padding: 0.5rem;
+}
+
+html body div#modal form p input, html body div#modal form p textarea {
+  width: 100%;
+  outline: none;
+  border: none;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  padding: 0.25rem;
+}
+
 html body footer {
   position: fixed;
   display: -webkit-box;

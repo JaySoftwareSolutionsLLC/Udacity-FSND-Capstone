@@ -43,6 +43,38 @@ html {
             }
             margin-top: $headerheight;
         }
+        div#modal {
+            display: none;
+            border: 0.25rem solid white;
+            max-height: 75%;
+            width: 30%;
+            position: fixed;
+            object-position: center;
+            top: 25%;
+            left: 35%;
+            background: hsla(0, 0%, 0%, 0.9);
+            border-radius: 1rem;
+            flex-flow: column;
+            align-items: center;
+            justify-content: space-around;
+            padding: 2rem;
+            h2 {
+                font-size: 2rem;
+            }
+            form {
+                width: 100%;
+                p {
+                    padding: 0.5rem;
+                    input, textarea {
+                        width: 100%;
+                        outline: none;
+                        border: none;
+                        box-sizing: border-box;
+                        padding: 0.25rem;
+                    }
+                }
+            }
+        }
         footer {
             position: fixed;
             display: flex;
