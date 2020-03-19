@@ -253,13 +253,23 @@ def create_app(test_config=None):
         form_type = request.json['formType']
         if (model == 'category' and form_type == 'create'):
             form = CategoryForm()
-            return render_template('category_form.html', sub_url='/api/categories', sub_method='post', category={}, action='create', form=form)
+            return render_template('category_form.html',
+                                   sub_url='/api/categories',
+                                   sub_method='post',
+                                   category={},
+                                   action=form_type.capitalize(),
+                                   form=form)
         if (model == 'category' and form_type == 'update'):
             cat_id = request.json['id']
             category = Category.query.get_or_404(cat_id)
             url = '/api/categories/' + cat_id + '/update'
             form = CategoryForm()
-            return render_template('category_form.html', sub_url=url, sub_method='patch', category=category, action='update', form=form)
+            return render_template('category_form.html',
+                                   sub_url=url,
+                                   sub_method='patch',
+                                   category=category,
+                                   action=form_type.capitalize(),
+                                   form=form)
 
 
     '''

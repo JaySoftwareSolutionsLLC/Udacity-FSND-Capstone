@@ -39,6 +39,7 @@ $('i.fa-plus').on('click', function() {
             let modalEl = $('div#modal');
             modalEl.empty().html(response);
             modalEl.css('display', 'flex');
+            listenForModalClose();
             listenForModalFormSubmission();
         }
     });
@@ -70,6 +71,7 @@ function listenForObjectUpdate() {
                 let modalEl = $('div#modal');
                 modalEl.empty().html(response);
                 modalEl.css('display', 'flex');
+                listenForModalClose();
                 listenForModalFormSubmission(parentFormEl);
                 listenForObjectDeletion(model, id, parentFormEl);
             }
@@ -148,3 +150,9 @@ function listenForModalFormSubmission(parentFormEl) {
 }
 
 listenForObjectUpdate();
+
+function listenForModalClose() {
+    $('i.fa-times').on('click', function() {
+        $('div#modal').empty().css('display', 'none');
+    })
+}

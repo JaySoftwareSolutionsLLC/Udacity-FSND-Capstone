@@ -22,5 +22,5 @@ if (decoded_jwt['permissions'].indexOf("update:any") == -1) {
 }
 // If the delete:any permissions is not part of jwt then hide all delete icons
 if (decoded_jwt['permissions'].indexOf("delete:any") == -1) {
-    // No delete icons yet
+    $('i.fa-times').hide();
 }
