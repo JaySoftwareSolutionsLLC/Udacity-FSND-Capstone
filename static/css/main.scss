@@ -1,5 +1,15 @@
 $headerheight: 3rem;
 $footerheight: 2rem;
+@mixin upper-left-icon {
+    position: absolute;
+    top: 0.25rem;
+    right: 0.25rem;
+    font-size: 1rem;
+    vertical-align: middle;
+    border-radius: 1rem;
+    padding: 0.25rem;
+    cursor: pointer;
+}
 html {
     background: black;
     color: white;
@@ -27,6 +37,7 @@ html {
             }
         }
         main {
+            margin-top: $headerheight;
             h1 {
                 width: 100%;
                 font-size: 3rem;
@@ -41,7 +52,6 @@ html {
                     cursor: pointer;
                 }
             }
-            margin-top: $headerheight;
         }
         div#modal {
             display: none;
@@ -63,8 +73,9 @@ html {
             }
             form {
                 width: 100%;
-                p {
-                    padding: 0.5rem;
+                span {
+                    margin: 0.5rem 0;
+                    display: block;
                     input, textarea {
                         width: 100%;
                         outline: none;
@@ -72,6 +83,9 @@ html {
                         box-sizing: border-box;
                         padding: 0.25rem;
                     }
+                }
+                i.fa-trash {
+                    @include upper-left-icon; 
                 }
             }
         }

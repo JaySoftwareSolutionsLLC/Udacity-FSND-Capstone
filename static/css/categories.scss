@@ -1,3 +1,13 @@
+@mixin upper-left-icon {
+    position: absolute;
+    top: 0.25rem;
+    right: 0.25rem;
+    font-size: 1rem;
+    vertical-align: middle;
+    border-radius: 1rem;
+    padding: 0.25rem;
+    cursor: pointer;
+}
 html {
     body {
         main {
@@ -8,6 +18,7 @@ html {
                 justify-content: space-around;
                 a.category {
                     display: flex;
+                    position: relative;
                     flex-flow: column nowrap;
                     align-items: center;
                     border: 1px solid black;
@@ -29,6 +40,9 @@ html {
                     }
                     p {
                         font-size: 0.75rem;
+                    }
+                    i.upper-left {
+                        @include upper-left-icon;
                     }
                 }
             }

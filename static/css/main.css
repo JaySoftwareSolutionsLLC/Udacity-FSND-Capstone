@@ -89,17 +89,29 @@ html body div#modal form {
   width: 100%;
 }
 
-html body div#modal form p {
-  padding: 0.5rem;
+html body div#modal form span {
+  margin: 0.5rem 0;
+  display: block;
 }
 
-html body div#modal form p input, html body div#modal form p textarea {
+html body div#modal form span input, html body div#modal form span textarea {
   width: 100%;
   outline: none;
   border: none;
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
   padding: 0.25rem;
+}
+
+html body div#modal form i.fa-trash {
+  position: absolute;
+  top: 0.25rem;
+  right: 0.25rem;
+  font-size: 1rem;
+  vertical-align: middle;
+  border-radius: 1rem;
+  padding: 0.25rem;
+  cursor: pointer;
 }
 
 html body footer {

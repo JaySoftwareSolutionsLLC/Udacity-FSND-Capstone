@@ -15,6 +15,7 @@ html body main section a.category {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+  position: relative;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
       -ms-flex-flow: column nowrap;
@@ -45,5 +46,16 @@ html body main section a.category h2 {
 
 html body main section a.category p {
   font-size: 0.75rem;
+}
+
+html body main section a.category i.upper-left {
+  position: absolute;
+  top: 0.25rem;
+  right: 0.25rem;
+  font-size: 1rem;
+  vertical-align: middle;
+  border-radius: 1rem;
+  padding: 0.25rem;
+  cursor: pointer;
 }
 /*# sourceMappingURL=categories.css.map */

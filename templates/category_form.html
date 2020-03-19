@@ -1,14 +1,28 @@
-<h2>Create Category</h2>
-<form action="/api/categories" method="post" novalidate>
+<h2>{{ action }} Category</h2>
+<form action='{{ sub_url }}' method='{{ sub_method }}' novalidate>
     {{ form.hidden_tag() }}
-    <p>
+    <span>
         {{ form.name.label }}<br>
+        {% if category.name is not none %}
+        {{ form.name(size=16, value=category.name) }}
+        {% else %}
         {{ form.name(size=16) }}
-    </p>
-    <p>
+        {% endif %}
+    </span>
+
+    <span>
         {{ form.description.label }}<br>
+        {% if category.description is not none %}
+        <textarea id="description" name="description">{{ category.description }}</textarea>
+        {% else %}
         {{ form.description() }}
-    </p>
-    <p>{{ form.submit() }}</p>
+        {% endif %}
+    </span>
+
+    {% if category.name is not none %}
+    <i class='fas fa-trash upper-right' title='delete {{ category.name }} cheatsheet'></i>
+    {% endif %}
+
+    <span>{{ form.submit() }}</span>
 </form>
 <!-- May be able to turn this into one generic form that loops through object properties -->

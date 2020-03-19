@@ -52,14 +52,20 @@ class Category(db.Model):
         db.session.delete(self)
         db.session.commit()
 
+    def html_format(self):
+        op = "<h2>{1}</h2><p>{2}</p><i class='fas fa-pencil-alt upper-left' title='Edit {1}' data-model='category' data-id='{0}'></i>".format(self.id, self.name, self.description)    
+        return op
+
     def format(self):
         # Create a formatted topics array for display purposes
         formatted_topics = [t.format() for t in self.topics]
+        html = self.html_format()
         return {
             'id': self.id,
             'name': self.name,
             'description': self.description,
-            'topics': formatted_topics}
+            'topics': formatted_topics,
+            'html': html}
 
 
 '''
