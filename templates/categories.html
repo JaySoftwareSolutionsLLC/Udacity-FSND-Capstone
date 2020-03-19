@@ -12,13 +12,9 @@
 {% endblock %}
 {% block content %}
 <h1>Categories <i class='fas fa-plus' title='New Category' data-model='category'></i></h1>
-<section>
+<section id='categories'>
     {% for cat in cats %}
-    <a href='/categories/{{ cat.id }}' class='category'>
-        <h2>{{ cat.name }}</h2>
-        <p>{{ cat.description }}</p>
-        <i class='fas fa-pencil-alt upper-left' title="Edit '{{ cat.name }}'" data-model='category' data-id='{{ cat.id }}'></i>
-    </a>
+    {{ cat.html|safe }}
     {% endfor %}
 </section>
 {% endblock %}

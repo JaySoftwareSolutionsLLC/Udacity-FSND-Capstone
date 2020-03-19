@@ -53,7 +53,7 @@ class Category(db.Model):
         db.session.commit()
 
     def html_format(self):
-        op = "<h2>{1}</h2><p>{2}</p><i class='fas fa-pencil-alt upper-left' title='Edit {1}' data-model='category' data-id='{0}'></i>".format(self.id, self.name, self.description)    
+        op = "<a href='/api/categories/{0}' class='category' data-id='{0}'><h2>{1}</h2><p>{2}</p><i class='fas fa-pencil-alt upper-left' title='Edit {1}' data-model='category' data-id='{0}'></i></a>".format(self.id, self.name, self.description)    
         return op
 
     def format(self):
