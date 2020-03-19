@@ -87,9 +87,7 @@ html {
                 i.fa-trash {
                     @include upper-left-icon;
                     left: 0.25rem;
-                    height: 2rem;
-                    width: 2rem;
-                    padding: 0.5rem;
+                    right: unset;
                 }
                 i.fa-times {
                     @include upper-left-icon;
