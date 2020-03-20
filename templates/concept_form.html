@@ -1,0 +1,15 @@
+{% extends 'layouts/form.html' %}
+{% block content %}
+<span>
+    {{ form.url.label }}<br>
+    {% if object.url is not none %}
+    {{ form.url(value=object.url) }}
+    {% else %}
+    {{ form.url() }}
+    {% endif %}
+</span>
+<span>
+    {{ form.topic_id.label }}<br>
+    {{ form.topic_id(value=parent_id) }}
+</span>
+{% endblock %}

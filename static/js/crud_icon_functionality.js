@@ -27,7 +27,7 @@ function pluralize(string) {
             break;
     
         default:
-            pluralStr = model + 's';
+            pluralStr = string + 's';
             break;
     }
     return pluralStr;
@@ -182,7 +182,7 @@ function listenForObjectDeletion(model, id) {
 
 function removeObjectFromDOM(model, id) {
     // Will need to update from just links (<a>) to include divs/spans for topics & concepts
-    $('a, ul').each(function() {
+    $('a, ul, li').each(function() {
         if ($(this).hasClass(model) && $(this).attr('data-id') == id) {
             $(this).remove();
         }

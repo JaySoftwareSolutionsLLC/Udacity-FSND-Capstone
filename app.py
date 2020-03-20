@@ -6,7 +6,7 @@ from models import setup_db, db, Category, Topic, Concept
 from auth.auth import AuthError, requires_auth
 from config import Config
 
-from forms import CategoryForm, TopicForm
+from forms import CategoryForm, TopicForm, ConceptForm
 
 
 def create_app(test_config=None):
@@ -300,6 +300,31 @@ def create_app(test_config=None):
                                    action=form_type.capitalize(),
                                    form=form)
 
+        if (model == 'concept' and form_type == 'create'):
+            parent_id = request.json['parentId']
+            form = ConceptForm()
+            return render_template('concept_form.html',
+                                   sub_url='/api/concepts',
+                                   sub_method='post',
+                                   model=model.capitalize(),
+                                   object={},
+                                   parent_id=parent_id,
+                                   action=form_type.capitalize(),
+                                   form=form)
+                                   
+        if (model == 'concept' and form_type == 'update'):
+            con_id = request.json['id']
+            concept = Concept.query.get_or_404(con_id)
+            url = '/api/concepts/' + con_id + '/update'
+            form = ConceptForm()
+            return render_template('concept_form.html',
+                                   sub_url=url,
+                                   sub_method='patch',
+                                   model=model.capitalize(),
+                                   object=concept,
+                                   parent_id=concept.topic_id,
+                                   action=form_type.capitalize(),
+                                   form=form)
     '''
     ERROR CODE HANDLING
     '''

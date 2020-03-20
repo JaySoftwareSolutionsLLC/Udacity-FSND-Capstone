@@ -26,13 +26,7 @@
     {% for t in cat.topics %}
     {{ t.html|safe }}
     <!-- {% for c in t.concepts %} 
-        <li>
-            {% if c.url is not none %}<a href='{{ c.url }}' target="_blank" title='visit website'><i class='fas fa-rocket'></i></a>{% endif %}
-            <a href='#'  title='Click to Copy' data-clipboard-text='{{ c.name }}' class='copy-to-clipboard' >
-                {{ c.name }}
-            </a>
-            <i class='fas fa-pencil-alt' title="Edit '{{ c.name }}'"></i>
-        </li>
+        
         {% endfor %} -->
     {% endfor %}
 </section>

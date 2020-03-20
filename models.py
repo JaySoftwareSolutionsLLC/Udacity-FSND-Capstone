@@ -110,14 +110,15 @@ class Topic(db.Model):
         db.session.commit()
 
     def html_format(self):
-        # concept_str = ""
-        # for c in concepts:
-        #     concept_str += c.html_format()
+        concepts_str = ""
+        for c in self.concepts:
+            concepts_str += c.html_format()
         op = """<ul class='topic' data-id='{0}'>
                     <i class="fas fa-plus" data-model="concept" data-parent-id='{0}' title="New {1} Concept"></i>
                     <h2>{1}<i class='fas fa-pencil-alt' data-model="topic" data-id='{0}' title="Edit '{1}'"></i></h2>
                     <p>{2}</p>
-                </ul>""".format(self.id, self.name, self.description)    
+                    {3}
+                </ul>""".format(self.id, self.name, self.description, concepts_str)    
         return op
 
     def format(self):
@@ -165,11 +166,28 @@ class Concept(db.Model):
         db.session.delete(self)
         db.session.commit()
 
+    def html_format(self):
+        url_str = ""
+        if (self.url):
+            url_str = """<a href='{0}' target='_blank' title='visit website'>
+                            <i class='fas fa-rocket'></i>
+                         </a>""".format(self.url)
+        op = """<li class='concept' data-id='{0}'>
+                    {2}
+                    <a href='#'  title='Click to Copy' data-clipboard-text='{1}'
+                    class='copy-to-clipboard' >{1}</a>
+                    <i class='fas fa-pencil-alt' data-model='concept'
+                    data-id='{0}' title="Edit '{1}'"></i>
+        </li>""".format(self.id, self.name, url_str)
+        return op
+
     def format(self):
+        html = self.html_format()
         return {
             'id': self.id,
             'name': self.name,
             'description': self.description,
             'url': self.url,
             'topic_id': self.topic_id,
+            'html': html
         }
