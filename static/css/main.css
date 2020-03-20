@@ -2,9 +2,13 @@ html {
   background: black;
   color: white;
   font-family: 'Dosis', sans-serif;
+  width: 100%;
+  height: 100%;
 }
 
 html body {
+  width: 100%;
+  height: 100%;
   padding: 0 2rem;
 }
 
@@ -38,14 +42,16 @@ html body header span i {
 }
 
 html body main {
-  margin-top: 3rem;
+  width: 100%;
+  height: 100%;
+  padding-top: 3rem;
 }
 
 html body main h1 {
   width: 100%;
   font-size: 3rem;
   text-align: center;
-  padding: 1rem 0 2rem 0;
+  padding: 1rem 0;
 }
 
 html body main h1 i {

@@ -2,6 +2,7 @@ from sqlalchemy import Column, String, create_engine
 from flask_sqlalchemy import SQLAlchemy
 import json
 import os
+from html import escape
 
 database_path = os.environ['DATABASE_URL']
 
@@ -178,7 +179,7 @@ class Concept(db.Model):
                     class='copy-to-clipboard' >{1}</a>
                     <i class='fas fa-pencil-alt' data-model='concept'
                     data-id='{0}' title="Edit '{1}'"></i>
-        </li>""".format(self.id, self.name, url_str)
+        </li>""".format(self.id, escape(self.name), url_str)
         return op
 
     def format(self):
