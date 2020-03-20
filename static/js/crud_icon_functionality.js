@@ -43,6 +43,7 @@ function openModalFromCRUDIconClick() {
         // Specify variables
         let model = $(this).attr('data-model');
         let id = $(this).attr('data-id') || 0;
+        let parentId = $(this).attr('data-parent-id') || 0;
         let formType = '';
         if (iconEl.hasClass('fa-plus')) {
             formType = 'create';
@@ -58,7 +59,8 @@ function openModalFromCRUDIconClick() {
             data: JSON.stringify({
                 model: model,
                 formType: formType,
-                id: id
+                id: id,
+                parentId: parentId
             }),
             contentType: 'application/json', // request = JSON
             dataType: 'html', // response = HTML
@@ -83,6 +85,18 @@ function listenForModalClose() {
     })
 }
 
+(function ($) {
+    $.fn.serializeAll = function () {
+        var data = $(this).serializeArray();
+
+        $(':disabled[name]', this).each(function () { 
+            data.push({ name: this.name, value: $(this).val() });
+        });
+
+        return data;
+    }
+})(jQuery);
+
 // Upon submission of form by user, request that the db be updated
 // ...with either the creation of a new row or the modification of
 // ...fields within a currently existing row
@@ -95,7 +109,7 @@ function listenForModalFormSubmission(model, id) {
         let token = localStorage.getItem('jwt');
         let url = formEl.attr('action');
         let method = formEl.attr('method');
-        let data = formEl.serializeArray();
+        let data = formEl.serializeAll();
         let jsonData = {}
         data.forEach(e => {
             if (e['name'] != 'csrf_token') {
@@ -124,8 +138,11 @@ function listenForModalFormSubmission(model, id) {
                     removeObjectFromDOM(model, id)
 
                     // Create new element to represent new/modified object
-                    $('section#categories').append(responseJSON[model]['html'])
-                    
+                    let parentId = responseJSON[model]['topic_id'] ||
+                                   responseJSON[model]['category_id'] ||
+                                   0
+                    addObjectToDOM(model, parentId, responseJSON[model]['html'])
+
                     // Reset listeners for CRUD icons
                     openModalFromCRUDIconClick();
                 }
@@ -159,13 +176,35 @@ function listenForObjectDeletion(model, id) {
     })
 }
 
+// function replaceObjectFromDOM() {
+
+// }
+
 function removeObjectFromDOM(model, id) {
     // Will need to update from just links (<a>) to include divs/spans for topics & concepts
-    $('a').each(function(i) {
+    $('a, ul').each(function() {
         if ($(this).hasClass(model) && $(this).attr('data-id') == id) {
             $(this).remove();
         }
     })
+}
+
+function addObjectToDOM(model, parentId, html) {
+    if (model == 'category') {
+        $('section#categories').append(html);
+        return;
+    } 
+    if (model == 'topic') {
+        $('section#topics').append(html);
+        return;
+    }
+    if (model == 'concept') {
+        $('ul.topic').each(function() {
+            if ($(this).attr('data-id') == parentId) {
+                $(this).append(html);
+            }
+        })
+    }
 }
 
 openModalFromCRUDIconClick();

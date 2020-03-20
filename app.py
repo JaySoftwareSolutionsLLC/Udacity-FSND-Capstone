@@ -6,7 +6,7 @@ from models import setup_db, db, Category, Topic, Concept
 from auth.auth import AuthError, requires_auth
 from config import Config
 
-from forms import CategoryForm
+from forms import CategoryForm, TopicForm
 
 
 def create_app(test_config=None):
@@ -245,7 +245,7 @@ def create_app(test_config=None):
     @app.route('/login')
     def login():
         form = CategoryForm()
-        return render_template('category_form.html', form=form)
+        return render_template('form.html', form=form)
 
     @app.route('/request_form_data', methods=['POST'])
     def request_form_data():
@@ -256,9 +256,11 @@ def create_app(test_config=None):
             return render_template('category_form.html',
                                    sub_url='/api/categories',
                                    sub_method='post',
-                                   category={},
+                                   model=model.capitalize(),
+                                   object={},
                                    action=form_type.capitalize(),
                                    form=form)
+                                   
         if (model == 'category' and form_type == 'update'):
             cat_id = request.json['id']
             category = Category.query.get_or_404(cat_id)
@@ -267,10 +269,36 @@ def create_app(test_config=None):
             return render_template('category_form.html',
                                    sub_url=url,
                                    sub_method='patch',
-                                   category=category,
+                                   model=model.capitalize(),
+                                   object=category,
                                    action=form_type.capitalize(),
                                    form=form)
 
+        if (model == 'topic' and form_type == 'create'):
+            parent_id = request.json['parentId']
+            form = TopicForm()
+            return render_template('topic_form.html',
+                                   sub_url='/api/topics',
+                                   sub_method='post',
+                                   model=model.capitalize(),
+                                   object={},
+                                   parent_id=parent_id,
+                                   action=form_type.capitalize(),
+                                   form=form)
+                                   
+        if (model == 'topic' and form_type == 'update'):
+            top_id = request.json['id']
+            topic = Topic.query.get_or_404(top_id)
+            url = '/api/topics/' + top_id + '/update'
+            form = TopicForm()
+            return render_template('topic_form.html',
+                                   sub_url=url,
+                                   sub_method='patch',
+                                   model=model.capitalize(),
+                                   object=topic,
+                                   parent_id=topic.category_id,
+                                   action=form_type.capitalize(),
+                                   form=form)
 
     '''
     ERROR CODE HANDLING

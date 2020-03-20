@@ -8,6 +8,7 @@
 <script type="text/javascript" src="/static/js/libs/jquery.js"></script>
 <script type="text/javascript" src="/static/js/libs/jquery-ui.js"></script>
 <script src="/static/js/hide_crud_icons.js" defer></script>
+<script src="/static/js/crud_icon_functionality.js" defer></script>
 <script defer>
     // When you click on a concept name it copies it to clipboard
     $.getScript("/static/js/libs/clipboard.min.js", function(){
@@ -20,14 +21,11 @@
 </script>
 {% endblock %}
 {% block content %}
-<h1>{{ cat.name }} <i class='fas fa-plus' title='New {{ cat.name }} Topic'></i></h1>
-<section>
+<h1>{{ cat.name }} <i class='fas fa-plus' data-model='topic' data-parent-id='{{ cat.id }}' title='New {{ cat.name }} Topic'></i></h1>
+<section id='topics'>
     {% for t in cat.topics %}
-    <ul class='topic'>
-        <i class='fas fa-plus' title='New {{ t.name }} Concept'></i>
-        <h3>{{ t.name }}<i class='fas fa-pencil-alt' title="Edit '{{ t.name }}'"></i></h3>
-        <p>{{ t.description }}</p>
-        {% for c in t.concepts %} 
+    {{ t.html|safe }}
+    <!-- {% for c in t.concepts %} 
         <li>
             {% if c.url is not none %}<a href='{{ c.url }}' target="_blank" title='visit website'><i class='fas fa-rocket'></i></a>{% endif %}
             <a href='#'  title='Click to Copy' data-clipboard-text='{{ c.name }}' class='copy-to-clipboard' >
@@ -35,8 +33,7 @@
             </a>
             <i class='fas fa-pencil-alt' title="Edit '{{ c.name }}'"></i>
         </li>
-        {% endfor %}
-    </ul>
+        {% endfor %} -->
     {% endfor %}
 </section>
 {% endblock %}

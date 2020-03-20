@@ -1,0 +1,7 @@
+{% extends 'layouts/form.html' %}
+{% block content %}
+<span>
+    {{ form.category_id.label }}<br>
+    {{ form.category_id(value=parent_id) }}
+</span>
+{% endblock %}

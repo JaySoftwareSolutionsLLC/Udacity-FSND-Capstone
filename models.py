@@ -53,7 +53,11 @@ class Category(db.Model):
         db.session.commit()
 
     def html_format(self):
-        op = "<a href='/api/categories/{0}' class='category' data-id='{0}'><h2>{1}</h2><p>{2}</p><i class='fas fa-pencil-alt upper-left' title='Edit {1}' data-model='category' data-id='{0}'></i></a>".format(self.id, self.name, self.description)    
+        op = """<a href='/categories/{0}' class='category' data-id='{0}'>
+                    <h2>{1}</h2>
+                    <p>{2}</p>
+                    <i class='fas fa-pencil-alt upper-left' title='Edit {1}' data-model='category' data-id='{0}'></i>
+                </a>""".format(self.id, self.name, self.description)    
         return op
 
     def format(self):
@@ -105,14 +109,27 @@ class Topic(db.Model):
         db.session.delete(self)
         db.session.commit()
 
+    def html_format(self):
+        # concept_str = ""
+        # for c in concepts:
+        #     concept_str += c.html_format()
+        op = """<ul class='topic' data-id='{0}'>
+                    <i class="fas fa-plus" data-model="concept" data-parent-id='{0}' title="New {1} Concept"></i>
+                    <h2>{1}<i class='fas fa-pencil-alt' data-model="topic" data-id='{0}' title="Edit '{1}'"></i></h2>
+                    <p>{2}</p>
+                </ul>""".format(self.id, self.name, self.description)    
+        return op
+
     def format(self):
         formatted_concepts = [c.format() for c in self.concepts]
+        html = self.html_format()
         return {
             'id': self.id,
             'name': self.name,
             'description': self.description,
             'category_id': self.category_id,
-            'concepts': formatted_concepts}
+            'concepts': formatted_concepts,
+            'html': html}
 
 
 '''

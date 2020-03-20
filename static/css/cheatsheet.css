@@ -52,12 +52,12 @@ html body main section ul.topic i.fa-plus {
   cursor: pointer;
 }
 
-html body main section ul.topic h3 {
+html body main section ul.topic h2 {
   font-size: 1.5rem;
   text-decoration: underline;
 }
 
-html body main section ul.topic h3 i {
+html body main section ul.topic h2 i {
   font-size: 1rem;
   padding: 0.5rem;
 }

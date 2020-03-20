@@ -1,0 +1,32 @@
+<h2>{{ action }} {{ model }}</h2>
+<form action='{{ sub_url }}' method='{{ sub_method }}' novalidate>
+    {{ form.hidden_tag() }}
+    <span>
+        {{ form.name.label }}<br>
+        {% if object.name is not none %}
+        {{ form.name(size=16, value=object.name) }}
+        {% else %}
+        {{ form.name(size=16) }}
+        {% endif %}
+    </span>
+
+    <span>
+        {{ form.description.label }}<br>
+        {% if object.description is not none %}
+        <textarea id="description" name="description">{{ object.description }}</textarea>
+        {% else %}
+        {{ form.description() }}
+        {% endif %}
+    </span>
+
+    {% block content %}{% endblock %}
+
+    {% if object.name is not none %}
+    <i class='fas fa-trash upper-right' title='delete {{ object.name }} {{ model }}'></i>
+    {% endif %}
+
+    <i class='fas fa-times' title='exit modal'></i>
+
+    <span>{{ form.submit() }}</span>
+</form>
+<!-- May be able to turn this into one generic form that loops through object properties -->
