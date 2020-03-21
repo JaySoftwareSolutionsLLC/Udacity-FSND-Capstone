@@ -70,6 +70,7 @@ function openModalFromCRUDIconClick() {
                 // Delete all content in modal and replace with form
                 modalEl.empty().html(response);
                 modalEl.css('display', 'flex');
+                modalEl.find('input#name').focus();
                 listenForModalClose();
                 listenForModalFormSubmission(model, id);
                 listenForObjectDeletion(model, id);

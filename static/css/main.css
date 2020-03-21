@@ -133,6 +133,10 @@ html body div#modal form i.fa-times {
   cursor: pointer;
 }
 
+html body div#modal form input#submit:focus {
+  outline: 0.25rem solid white;
+}
+
 html body footer {
   position: fixed;
   display: -webkit-box;

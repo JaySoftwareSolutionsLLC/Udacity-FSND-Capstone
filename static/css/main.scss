@@ -98,6 +98,11 @@ html {
                 i.fa-times {
                     @include upper-left-icon;
                 }
+                input#submit {
+                    &:focus {
+                        outline: 0.25rem solid white;
+                    }
+                }
             }
         }
         footer {
