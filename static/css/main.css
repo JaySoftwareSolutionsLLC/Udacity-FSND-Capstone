@@ -102,6 +102,8 @@ html body div#modal form span {
 
 html body div#modal form span input, html body div#modal form span textarea {
   width: 100%;
+  max-width: 100%;
+  min-width: 100%;
   outline: none;
   border: none;
   -webkit-box-sizing: border-box;

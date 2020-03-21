@@ -84,6 +84,8 @@ html {
                     display: block;
                     input, textarea {
                         width: 100%;
+                        max-width: 100%;
+                        min-width: 100%;
                         outline: none;
                         border: none;
                         box-sizing: border-box;
