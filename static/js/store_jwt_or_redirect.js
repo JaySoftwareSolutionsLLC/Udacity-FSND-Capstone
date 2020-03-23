@@ -28,14 +28,14 @@ localStoreJWTFromQueryParams();
 
 // If token does not exist or is expired, redirect to Auth0 login page
 if (!localStorage.getItem("jwt")) {
-    window.location.replace("https://bjb.auth0.com/login?state=g6Fo2SBvM2RkVno0ckJtc29paUJ2bDBxVUFlTVZyTUJtMHl0cKN0aWTZIGhUekVzQjhwd0FlTUZDVkZoN0FCV2Q1YjVKYXo5T29Go2NpZNkgdEpRbkdKOFZaOHMxUXFiaGN2RTViYkhKOTRIUVF2RU8&client=tJQnGJ8VZ8s1QqbhcvE5bbHJ94HQQvEO&protocol=oauth2&audience=cheatsheet&response_type=token&redirect_uri=https%3A%2F%2Fflask-test-4.herokuapp.com%2Fcategories");
+    window.location.replace("https://bjb.auth0.com/login?state=g6Fo2SBvM2RkVno0ckJtc29paUJ2bDBxVUFlTVZyTUJtMHl0cKN0aWTZIGhUekVzQjhwd0FlTUZDVkZoN0FCV2Q1YjVKYXo5T29Go2NpZNkgdEpRbkdKOFZaOHMxUXFiaGN2RTViYkhKOTRIUVF2RU8&client=tJQnGJ8VZ8s1QqbhcvE5bbHJ94HQQvEO&protocol=oauth2&audience=cheatsheet&response_type=token&redirect_uri=https://flask-test-4.herokuapp.com/categories");
 } else {
     let token = localStorage.getItem("jwt");
     let decodedJWT = parseJwt(token);
     // console.log(decodedJWT);
     let currentTS = Math.round((new Date()).getTime() / 1000);
     if (decodedJWT['exp'] < currentTS) {
-        window.location.replace("https://bjb.auth0.com/login?state=g6Fo2SBvM2RkVno0ckJtc29paUJ2bDBxVUFlTVZyTUJtMHl0cKN0aWTZIGhUekVzQjhwd0FlTUZDVkZoN0FCV2Q1YjVKYXo5T29Go2NpZNkgdEpRbkdKOFZaOHMxUXFiaGN2RTViYkhKOTRIUVF2RU8&client=tJQnGJ8VZ8s1QqbhcvE5bbHJ94HQQvEO&protocol=oauth2&audience=cheatsheet&response_type=token&redirect_uri=https%3A%2F%2Fflask-test-4.herokuapp.com%2Fcategories");
+        window.location.replace("https://bjb.auth0.com/login?state=g6Fo2SBvM2RkVno0ckJtc29paUJ2bDBxVUFlTVZyTUJtMHl0cKN0aWTZIGhUekVzQjhwd0FlTUZDVkZoN0FCV2Q1YjVKYXo5T29Go2NpZNkgdEpRbkdKOFZaOHMxUXFiaGN2RTViYkhKOTRIUVF2RU8&client=tJQnGJ8VZ8s1QqbhcvE5bbHJ94HQQvEO&protocol=oauth2&audience=cheatsheet&response_type=token&redirect_uri=https://flask-test-4.herokuapp.com/categories");
     }
 }
 
