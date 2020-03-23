@@ -1,5 +1,3 @@
-let token = localStorage.getItem("jwt");
-
 function parseJwt (token) {
     // https://stackoverflow.com/questions/38552003/how-to-decode-jwt-token-in-javascript
    var base64Url = token.split('.')[1];
