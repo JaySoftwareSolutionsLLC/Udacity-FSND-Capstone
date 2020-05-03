@@ -123,10 +123,14 @@ html {
     }
 }
 @media only screen and (max-width: 1000px) {
-    div#modal {
-        width: 90%;
-        left: 5%;
-        height: 90%;
-        top: 5%;
+    html {
+        body {
+            div#modal {
+                width: 90%;
+                left: 5%;
+                height: 90%;
+                top: 5%;
+            }
+        }
     }
 }

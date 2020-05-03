@@ -160,7 +160,7 @@ html body footer {
 }
 
 @media only screen and (max-width: 1000px) {
-  div#modal {
+  html body div#modal {
     width: 90%;
     left: 5%;
     height: 90%;
