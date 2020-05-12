@@ -149,6 +149,7 @@ class Concept(db.Model):
     topic_id = db.Column(db.Integer,
                          db.ForeignKey('Topic.id'),
                          nullable=False)
+    tags = db.relationship('ConceptTag', backref='concept', lazy=True, cascade = 'delete-orphan')
 
     def __init__(self, name, description, url, topic_id):
         self.name = name
@@ -197,8 +198,9 @@ class Concept(db.Model):
 class Tag(db.Model):
     __tablename__ = 'Tag'
     id = Column(db.Integer, primary_key=True)
-    name = Column(String(128), nullable=False)
-    description = Column(String(1024), nullable=True)
+    name = Column(String(16), nullable=False)
+    description = Column(String(256), nullable=True)
+    concepts = db.relationship('ConceptTag', backref='tag', lazy=True, cascade = 'delete-orphan')
 
     def __init__(self, name, description):
         self.name = name
@@ -222,3 +224,8 @@ class Tag(db.Model):
             'name': self.name,
             'description': self.description
         }
+
+# association table between Tag and Concept
+class ConceptTag(db.Model):
+    concept_id = db.Column(db.ForeignKey('Concept.id'), primary_key = True),
+    tag_id = db.Column(db.ForeignKey('Tag.id'), primary_key = True),
