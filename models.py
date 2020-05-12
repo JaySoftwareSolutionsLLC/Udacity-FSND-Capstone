@@ -192,3 +192,33 @@ class Concept(db.Model):
             'topic_id': self.topic_id,
             'html': html
         }
+
+# Tags are ways to categorize content
+class Tag(db.Model):
+    __tablename__ = 'Tag'
+    id = Column(db.Integer, primary_key=True)
+    name = Column(String(128), nullable=False)
+    description = Column(String(1024), nullable=True)
+
+    def __init__(self, name, description):
+        self.name = name
+        self.description = description
+
+    def insert(self):
+        db.session.add(self)
+        db.session.commit()
+
+    def update(self):
+        db.session.commit()
+
+    def delete(self):
+        db.session.delete(self)
+        db.session.commit()
+
+    def format(self):
+        html = self.html_format()
+        return {
+            'id': self.id,
+            'name': self.name,
+            'description': self.description
+        }
