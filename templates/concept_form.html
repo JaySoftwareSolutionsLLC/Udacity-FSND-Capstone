@@ -12,4 +12,11 @@
     {{ form.topic_id.label }}<br>
     {{ form.topic_id(value=parent_id) }}
 </span>
+<span class='tags'>
+    <label for="tags" style='display: inline;'>Tags:</label>
+    <input type="text" style='display: inline;' name="concept-tag" id="concept-tag">
+    {% for tag in object.formatted_tags %}
+        <li class='concept-tag'>{{ tag.name }}</li>
+    {% endfor %}
+</span>
 {% endblock %}

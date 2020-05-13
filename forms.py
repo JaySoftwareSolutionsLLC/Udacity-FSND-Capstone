@@ -19,4 +19,5 @@ class ConceptForm(FlaskForm):
     description = StringField('description', widget=TextArea())
     url = StringField('url')
     topic_id = IntegerField('topic_id', validators=[DataRequired()], render_kw={'disabled':''},)
+    tags = StringField('tag')
     submit = SubmitField('Submit')

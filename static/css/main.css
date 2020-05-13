@@ -139,6 +139,14 @@ html body div#modal form input#submit:focus {
   outline: 0.25rem solid white;
 }
 
+html body div#modal form span.tags li.concept-tag {
+  display: inline-block;
+  padding: 0.5rem;
+  border: 1px solid white;
+  border-radius: .5rem 0.25rem;
+  margin: 0.5rem;
+}
+
 html body footer {
   position: fixed;
   display: -webkit-box;

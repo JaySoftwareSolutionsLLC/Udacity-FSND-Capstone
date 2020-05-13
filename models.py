@@ -151,6 +151,7 @@ class Concept(db.Model):
                          nullable=False)
     tags = db.relationship('ConceptTag', backref='concept', lazy=True, cascade = 'delete-orphan')
 
+
     def __init__(self, name, description, url, topic_id):
         self.name = name
         self.description = description
@@ -183,6 +184,10 @@ class Concept(db.Model):
         </li>""".format(self.id, escape(self.name), url_str)
         return op
 
+    def return_formatted_tags(self):
+        return [Tag.query.get(t.tag_id).format() for t in self.tags]
+
+
     def format(self):
         html = self.html_format()
         return {
@@ -191,7 +196,8 @@ class Concept(db.Model):
             'description': self.description,
             'url': self.url,
             'topic_id': self.topic_id,
-            'html': html
+            'html': html,
+            'formatted_tags': self.return_formatted_tags()
         }
 
 # Tags are ways to categorize content
@@ -218,7 +224,6 @@ class Tag(db.Model):
         db.session.commit()
 
     def format(self):
-        html = self.html_format()
         return {
             'id': self.id,
             'name': self.name,
@@ -231,3 +236,8 @@ class ConceptTag(db.Model):
 
     concept_id = db.Column(db.ForeignKey('Concept.id'), primary_key = True)
     tag_id = db.Column(db.ForeignKey('Tag.id'), primary_key = True)
+    def format(self):
+        return {
+            'concept_id': self.concept_id,
+            'tag_id': self.tag_id
+        }

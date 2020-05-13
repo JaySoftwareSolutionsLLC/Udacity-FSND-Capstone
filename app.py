@@ -315,6 +315,7 @@ def create_app(test_config=None):
         if (model == 'concept' and form_type == 'update'):
             con_id = request.json['id']
             concept = Concept.query.get_or_404(con_id)
+            concept.formatted_tags = concept.return_formatted_tags()
             url = '/api/concepts/' + con_id + '/update'
             form = ConceptForm()
             return render_template('concept_form.html',
