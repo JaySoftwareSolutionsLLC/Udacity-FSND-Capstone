@@ -228,6 +228,6 @@ class Tag(db.Model):
 # association table between Tag and Concept
 class ConceptTag(db.Model):
     __tablename__ = 'ConceptTag'
-    
-    concept_id = db.Column(db.ForeignKey('Concept.id'), primary_key = True),
-    tag_id = db.Column(db.ForeignKey('Tag.id'), primary_key = True),
+
+    concept_id = db.Column(db.ForeignKey('Concept.id'), primary_key = True)
+    tag_id = db.Column(db.ForeignKey('Tag.id'), primary_key = True)
