@@ -91,6 +91,9 @@ html {
                         box-sizing: border-box;
                         padding: 0.25rem;
                     }
+                    textarea {
+                        height: 10rem;
+                    }
                 }
                 i.fa-trash {
                     @include upper-left-icon;
